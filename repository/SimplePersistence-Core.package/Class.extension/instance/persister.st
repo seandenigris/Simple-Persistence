@@ -1,0 +1,4 @@
+*SimplePersistence-Core
+persister
+
+	^ SPFileDatabase.
