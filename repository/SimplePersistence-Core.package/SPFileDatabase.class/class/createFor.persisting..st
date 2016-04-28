@@ -4,7 +4,7 @@ createFor: aClass persisting: aSymbol
 	| topLevelCategory dbClassName dbClass |
 	topLevelCategory := aClass category copyUpTo: $-.
 	dbClassName := (aClass name, 'DB') asSymbol.
-	dbClass := SPFileDatabase subclass: dbClassName
+	dbClass := SpFileDatabase subclass: dbClassName
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''

@@ -1,4 +1,4 @@
 *SimplePersistence-Core
 persister
 
-	^ SPFileDatabase.
+	^ SpFileDatabase.

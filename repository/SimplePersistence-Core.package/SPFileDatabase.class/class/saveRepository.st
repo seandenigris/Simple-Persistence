@@ -5,9 +5,4 @@ saveRepository
 	lock critical: [
 		self trimBackups.
 		version := self lastBackupVersion + 1.
-		ReferenceStream 
-			newFileNamed: (self backupDirectory / self name, version asString) fullName
-			do: [ :f | 
-				f
-					nextPut: self repositories;
-					flush ] ].
+		self serializer serialize: self repositories to: self backupDirectory / self name, version asString ].
