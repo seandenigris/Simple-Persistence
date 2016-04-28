@@ -1,7 +1,7 @@
 {
 	"class" : {
 		"availableVersions" : "SeanDeNigris 4/1/2013 14:53",
-		"backupDirectory" : "TorstenBergmann 10/31/2013 10:52",
+		"backupDirectory" : "tbn 3/1/2013 23:09",
 		"backupDirectoryName" : "tbn 3/1/2013 23:09",
 		"backupFileForVersion:" : "SeanDeNigris 4/1/2013 14:54",
 		"backupFiles" : "SeanDeNigris 2/4/2013 12:48",
@@ -19,7 +19,7 @@
 		"shutDown:" : "rjl 12/4/2007 18:19",
 		"startUp:" : "rjl 12/4/2007 18:24",
 		"takeSnapshot" : "SeanDeNigris 5/29/2011 13:26",
-		"trimBackups" : "SeanDeNigris 4/1/2013 14:54",
+		"trimBackups" : "SeanDeNigris 11/11/2013 22:37",
 		"versionOf:" : "SeanDeNigris 2/1/2013 15:43" },
 	"instance" : {
 		 } }
