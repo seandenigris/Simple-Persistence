@@ -9,7 +9,6 @@
 		"createFor:persisting:" : "SeanDeNigris 2/1/2013 15:26",
 		"defaultHistoryCount" : "SeanDeNigris 5/29/2011 13:22",
 		"enablePersistence" : "rjl 12/4/2007 18:15",
-		"extensionFor:" : "SeanDeNigris 12/1/2011 12:55",
 		"lastBackupVersion" : "SeanDeNigris 4/11/2012 23:05",
 		"persist:in:" : "SeanDeNigris 12/8/2011 00:05",
 		"repositories" : "SeanDeNigris 5/29/2011 13:27",
@@ -22,6 +21,6 @@
 		"startUp:" : "rjl 12/4/2007 18:24",
 		"takeSnapshot" : "SeanDeNigris 5/29/2011 13:26",
 		"trimBackups" : "SeanDeNigris 4/11/2012 23:15",
-		"versionOf:" : "SeanDeNigris 10/29/2011 18:36" },
+		"versionOf:" : "SeanDeNigris 2/1/2013 15:43" },
 	"instance" : {
 		 } }
