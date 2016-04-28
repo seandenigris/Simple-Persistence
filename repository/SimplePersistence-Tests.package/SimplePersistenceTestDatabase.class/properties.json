@@ -11,5 +11,5 @@
 	"name" : "SimplePersistenceTestDatabase",
 	"pools" : [
 		 ],
-	"super" : "SPFileDatabase",
+	"super" : "SpFileDatabase",
 	"type" : "normal" }
