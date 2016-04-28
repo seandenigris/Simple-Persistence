@@ -1,0 +1,14 @@
+{
+	"category" : "SimplePersistence-ReferenceStream",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SpReferenceStreamSerializer",
+	"pools" : [
+		 ],
+	"super" : "SpSerializer",
+	"type" : "normal" }
