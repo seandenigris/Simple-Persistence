@@ -5,4 +5,6 @@ create
 		addInitializer;
 		addRepositoryAccessorFor: instVarName of: containerClass;
 		addRestorationMethodFor: containerClass;
-		addBackupDirectoryHook.
+		addBackupDirectoryHook;
+		addSaveScript;
+		addRestoreScript.
