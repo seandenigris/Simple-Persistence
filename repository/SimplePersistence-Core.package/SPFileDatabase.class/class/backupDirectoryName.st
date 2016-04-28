@@ -1,4 +1,4 @@
-override in subclasses
+accessing
 backupDirectoryName
 
 	^self name

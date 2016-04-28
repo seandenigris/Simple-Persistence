@@ -1,13 +1,13 @@
 {
 	"class" : {
 		"availableVersions" : "SeanDeNigris 4/1/2013 14:53",
-		"backupDirectory" : "TorstenBergmann 10/31/2013 10:52",
+		"backupDirectory" : "SeanDeNigris 4/24/2015 10:49",
 		"backupDirectoryName" : "tbn 3/1/2013 23:09",
+		"backupDirectoryParent" : "SeanDeNigris 4/24/2015 10:49",
 		"backupFileForVersion:" : "SeanDeNigris 4/1/2013 14:54",
 		"backupFiles" : "SeanDeNigris 2/4/2013 12:48",
 		"backupVersion:" : "SeanDeNigris 2/1/2013 15:24",
 		"defaultHistoryCount" : "SeanDeNigris 5/29/2011 13:22",
-		"disablePersistence" : "SeanDeNigris 3/12/2015 17:34",
 		"enablePersistence" : "rjl 12/4/2007 18:15",
 		"lastBackupVersion" : "SeanDeNigris 2/4/2013 12:47",
 		"persist:in:" : "SeanDeNigris 2/1/2013 17:49",
@@ -20,7 +20,7 @@
 		"shutDown:" : "rjl 12/4/2007 18:19",
 		"startUp:" : "rjl 12/4/2007 18:24",
 		"takeSnapshot" : "SeanDeNigris 5/29/2011 13:26",
-		"trimBackups" : "SeanDeNigris 11/11/2013 22:37",
+		"trimBackups" : "SeanDeNigris 4/1/2013 14:54",
 		"versionOf:" : "SeanDeNigris 2/1/2013 15:43" },
 	"instance" : {
 		 } }

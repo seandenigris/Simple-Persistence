@@ -1,4 +1,4 @@
-override in subclasses
+accessing
 backupDirectory
 
-	^ (FileLocator imageDirectory / self backupDirectoryName) ensureCreateDirectory.
+	^ (self backupDirectoryParent / self backupDirectoryName) ensureCreateDirectory.
