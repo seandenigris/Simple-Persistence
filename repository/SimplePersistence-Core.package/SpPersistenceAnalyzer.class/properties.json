@@ -1,0 +1,23 @@
+{
+	"category" : "SimplePersistence-Core-Developer",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"okButton",
+		"colorLabel",
+		"buyLevelLabel",
+		"sellLevelLabel",
+		"colorModel",
+		"buyLevelModel",
+		"dateModel",
+		"sellLevelModel",
+		"listModel",
+		"classDefinition" ],
+	"name" : "SpPersistenceAnalyzer",
+	"pools" : [
+		 ],
+	"super" : "ComposableModel",
+	"type" : "normal" }
