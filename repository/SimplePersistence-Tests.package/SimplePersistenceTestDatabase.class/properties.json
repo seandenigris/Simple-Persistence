@@ -1,0 +1,15 @@
+{
+	"category" : "SimplePersistence-Tests",
+	"classinstvars" : [
+		"number",
+		"string" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SimplePersistenceTestDatabase",
+	"pools" : [
+		 ],
+	"super" : "SPFileDatabase",
+	"type" : "normal" }
