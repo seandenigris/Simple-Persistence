@@ -1,4 +1,3 @@
 accessing
 backupDirectoryParent
-
-	^ FileLocator imageDirectory
+	^ self rootDataFolder

@@ -3,7 +3,7 @@
 	"classinstvars" : [
 		"lock" ],
 	"classvars" : [
-		 ],
+		"RootDataFolder" ],
 	"commentStamp" : "SeanDeNigris 5/29/2011 13:36",
 	"instvars" : [
 		 ],
