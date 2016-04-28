@@ -1,4 +1,4 @@
-override in subclasses
+private
 backupVersion: aNumber
 	| backup |
 	backup := self backupFileForVersion: aNumber.

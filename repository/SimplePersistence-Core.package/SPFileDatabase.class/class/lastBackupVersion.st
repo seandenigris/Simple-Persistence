@@ -1,4 +1,4 @@
-override in subclasses
+private
 lastBackupVersion
 
 	| lastBackupFile |

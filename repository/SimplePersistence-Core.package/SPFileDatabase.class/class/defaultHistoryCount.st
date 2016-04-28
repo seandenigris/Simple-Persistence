@@ -1,4 +1,4 @@
-override in subclasses
+accessing
 defaultHistoryCount
 	"How many backups to keep."
 	^ 50

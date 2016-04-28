@@ -1,5 +1,5 @@
 private
 availableVersions
 
-	^ self backupDirectory files collect: [ :e | 
+	^ self backupFiles collect: [ :e | 
 		self versionOf: e ].

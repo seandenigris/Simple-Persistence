@@ -1,3 +1,3 @@
-override in subclasses
+private
 versionOf: backupFile
 	^ backupFile extension asInteger.

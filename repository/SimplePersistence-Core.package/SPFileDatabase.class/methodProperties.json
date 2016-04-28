@@ -1,9 +1,8 @@
 {
 	"class" : {
-		"availableVersions" : "tbn 2/28/2013 12:10",
-		"backupDirectory" : "tbn 3/1/2013 23:09",
-		"backupDirectoryName" : "tbn 3/1/2013 23:09",
-		"backupFileForVersion:" : "SeanDeNigris 4/11/2012 23:05",
+		"availableVersions" : "SeanDeNigris 4/1/2013 14:53",
+		"backupDirectory" : "SeanDeNigris 5/15/2012 23:05",
+		"backupFileForVersion:" : "SeanDeNigris 4/1/2013 14:54",
 		"backupFiles" : "SeanDeNigris 2/4/2013 12:48",
 		"backupVersion:" : "SeanDeNigris 2/1/2013 15:24",
 		"defaultHistoryCount" : "SeanDeNigris 5/29/2011 13:22",
@@ -13,13 +12,13 @@
 		"repositories" : "SeanDeNigris 5/29/2011 13:27",
 		"restoreBackupVersion:" : "SeanDeNigris 1/11/2012 19:55",
 		"restoreLastBackup" : "SeanDeNigris 1/11/2012 20:33",
-		"restoreRepositories:" : "SeanDeNigris 5/29/2011 13:29",
+		"restoreRepositories:" : "SeanDeNigris 4/1/2013 14:55",
 		"saveRepository" : "SeanDeNigris 2/1/2013 14:10",
 		"serializer" : "SeanDeNigris 2/1/2013 14:19",
 		"shutDown:" : "rjl 12/4/2007 18:19",
 		"startUp:" : "rjl 12/4/2007 18:24",
 		"takeSnapshot" : "SeanDeNigris 5/29/2011 13:26",
-		"trimBackups" : "SeanDeNigris 4/11/2012 23:15",
+		"trimBackups" : "SeanDeNigris 4/1/2013 14:54",
 		"versionOf:" : "SeanDeNigris 2/1/2013 15:43" },
 	"instance" : {
 		 } }
