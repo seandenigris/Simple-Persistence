@@ -1,0 +1,15 @@
+{
+	"category" : "SimplePersistence-Core-Developer",
+	"classinstvars" : [
+		"persistedClass",
+		"persistedInstance" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SpPersistentBehavior",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

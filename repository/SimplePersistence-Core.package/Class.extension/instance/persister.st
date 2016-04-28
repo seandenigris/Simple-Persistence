@@ -1,4 +1,4 @@
-*SimplePersistence-Core
+*SimplePersistence-Core-Developer
 persister
 
 	^ SpFileDatabase.

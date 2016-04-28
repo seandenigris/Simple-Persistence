@@ -1,14 +1,13 @@
 {
-	"category" : "SimplePersistence-Core",
+	"category" : "SimplePersistence-Core-Developer",
 	"classinstvars" : [
-		"persistedClass",
-		"persistedInstance" ],
+		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
 		 ],
-	"name" : "PersistenceBehavior",
+	"name" : "SpFileDatabaseBehavior",
 	"pools" : [
 		 ],
 	"super" : "Object",

@@ -1,16 +1,12 @@
 {
 	"class" : {
-		"addInitializer" : "SeanDeNigris 1/11/2012 20:00",
-		"addRepositoryAccessorFor:of:" : "SeanDeNigris 12/8/2011 00:37",
-		"addRestorationMethodFor:" : "SeanDeNigris 12/8/2011 00:21",
 		"backupDirectory" : "SeanDeNigris 5/15/2012 23:05",
 		"backupFileForVersion:" : "SeanDeNigris 4/11/2012 23:05",
 		"backupVersion:" : "SeanDeNigris 2/1/2013 15:24",
-		"createFor:persisting:" : "SeanDeNigris 2/1/2013 15:26",
 		"defaultHistoryCount" : "SeanDeNigris 5/29/2011 13:22",
 		"enablePersistence" : "rjl 12/4/2007 18:15",
 		"lastBackupVersion" : "SeanDeNigris 4/11/2012 23:05",
-		"persist:in:" : "SeanDeNigris 12/8/2011 00:05",
+		"persist:in:" : "SeanDeNigris 2/1/2013 17:49",
 		"repositories" : "SeanDeNigris 5/29/2011 13:27",
 		"restoreBackupVersion:" : "SeanDeNigris 1/11/2012 19:55",
 		"restoreLastBackup" : "SeanDeNigris 1/11/2012 20:33",

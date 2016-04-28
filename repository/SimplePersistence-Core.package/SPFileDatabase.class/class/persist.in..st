@@ -1,5 +1,6 @@
-setting up
+*SimplePersistence-Core-Developer
 persist: aSymbol in: aClass 
+	"See Object>>#persistIn:as:"
 
-	self createFor: aClass persisting: aSymbol.
-	PersistenceBehavior addTo: aClass for: aSymbol.
+	SpFileDatabaseBehavior createFor: aClass persisting: aSymbol.
+	SpPersistentBehavior addTo: aClass for: aSymbol.

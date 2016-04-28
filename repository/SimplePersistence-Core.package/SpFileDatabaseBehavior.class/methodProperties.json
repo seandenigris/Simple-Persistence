@@ -1,0 +1,8 @@
+{
+	"class" : {
+		"addInitializer" : "SeanDeNigris 2/1/2013 17:39",
+		"addRepositoryAccessorFor:of:" : "SeanDeNigris 2/1/2013 17:40",
+		"addRestorationMethodFor:" : "SeanDeNigris 2/1/2013 17:40",
+		"createFor:persisting:" : "SeanDeNigris 2/1/2013 17:43" },
+	"instance" : {
+		 } }
