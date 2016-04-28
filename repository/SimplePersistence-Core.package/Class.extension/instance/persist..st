@@ -1,5 +1,5 @@
 *SimplePersistence-Core-Developer
-simplePersist: aSymbol
+persist: aSymbol
 	"
 	aSymbol - name of the instanceVariable to persist
 	See Object>>#persistIn:as: for more information"
