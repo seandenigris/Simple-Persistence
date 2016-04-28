@@ -2,7 +2,7 @@ setting up
 addInitializer
 	"Call on subclasses to add class initialization"
 
-	self class compile:
+	self databaseClass class compile:
 'initialize
 
 	self restoreLastBackup.

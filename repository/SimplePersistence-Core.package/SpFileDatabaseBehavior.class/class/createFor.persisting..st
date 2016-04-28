@@ -1,15 +1,8 @@
 setting up
 createFor: aClass persisting: aSymbol 
 
-	| topLevelCategory dbClassName dbClass |
-	topLevelCategory := aClass category copyUpTo: $-.
-	dbClassName := (topLevelCategory, 'DB') asSymbol.
-	dbClass := SpFileDatabase subclass: dbClassName
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: topLevelCategory, '-Persistence'.
-	dbClass
-		addInitializer;
-		addRepositoryAccessorFor: aSymbol of: aClass;
-		addRestorationMethodFor: aClass.
+	| instance |
+	instance := self new
+			containerClass: aClass;
+			instVarName: aSymbol.
+	^ instance create.

@@ -5,6 +5,6 @@ addTo: aClass for: aSymbol
 	template := 
 'restoreFrom: anObject
 
-	{2} := anObject.'.
+	{1} := anObject.'.
 	source := template format: { aSymbol }.
 	aClass class compile: source classified: 'persistence'.

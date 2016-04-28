@@ -7,4 +7,4 @@ addRestorationMethodFor: aClass
 
 	{1} restoreFrom: someRepositories first.'.
 	source := template format: { aClass name }.
-	self class compile: source.
+	self databaseClass class compile: source.

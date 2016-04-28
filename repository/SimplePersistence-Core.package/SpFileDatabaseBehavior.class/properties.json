@@ -6,7 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		 ],
+		"containerClass",
+		"instVarName",
+		"databaseClass" ],
 	"name" : "SpFileDatabaseBehavior",
 	"pools" : [
 		 ],

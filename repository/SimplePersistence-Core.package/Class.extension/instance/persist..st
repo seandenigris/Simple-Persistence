@@ -1,5 +1,7 @@
 *SimplePersistence-Core-Developer
 persist: aSymbol
-	"See Object>>#persistIn:as:"
+	"
+	aSymbol - name of the instanceVariable to persist
+	See Object>>#persistIn:as: for more information"
 
 	self persister persist: aSymbol in: self.

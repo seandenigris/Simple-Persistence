@@ -1,8 +1,11 @@
 {
 	"class" : {
-		"addInitializer" : "SeanDeNigris 2/1/2013 17:39",
-		"addRepositoryAccessorFor:of:" : "SeanDeNigris 2/1/2013 17:40",
-		"addRestorationMethodFor:" : "SeanDeNigris 2/1/2013 17:40",
-		"createFor:persisting:" : "SeanDeNigris 2/1/2013 17:43" },
+		"createFor:persisting:" : "SeanDeNigris 2/4/2013 10:21" },
 	"instance" : {
-		 } }
+		"addInitializer" : "SeanDeNigris 2/4/2013 10:31",
+		"addRepositoryAccessorFor:of:" : "SeanDeNigris 2/4/2013 10:34",
+		"addRestorationMethodFor:" : "SeanDeNigris 2/4/2013 10:34",
+		"containerClass:" : "SeanDeNigris 2/4/2013 10:25",
+		"create" : "SeanDeNigris 2/4/2013 10:32",
+		"databaseClass" : "SeanDeNigris 2/4/2013 10:33",
+		"instVarName:" : "SeanDeNigris 2/4/2013 10:25" } }
