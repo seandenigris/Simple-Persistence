@@ -1,2 +1,2 @@
 SystemOrganization addCategory: #'SimplePersistence-Core'!
-SystemOrganization addCategory: #'SimplePersistence-Core-Developer'!
+SystemOrganization addCategory: 'SimplePersistence-Core-Developer'!
