@@ -7,4 +7,4 @@ addRepositoryAccessorFor: aSymbol of: aClass
 
 	^ \{ {1} {2} \}.'.
 	source := template format: { aClass name. aSymbol }.
-	self databaseClass class compile: source.
+	self databaseClass class compile: source classified: 'loading/saving'.
