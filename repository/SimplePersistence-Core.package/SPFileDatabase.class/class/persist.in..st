@@ -1,4 +1,4 @@
-*SimplePersistence-Core-Developer
+startup/shutdown
 persist: aSymbol in: aClass 
 	"See Object>>#persistIn:as:"
 

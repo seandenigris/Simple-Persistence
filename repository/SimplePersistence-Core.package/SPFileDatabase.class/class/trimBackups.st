@@ -1,4 +1,4 @@
-private
+override in subclasses
 trimBackups
 	| entries versionsToKeep |
 	versionsToKeep := self defaultHistoryCount.

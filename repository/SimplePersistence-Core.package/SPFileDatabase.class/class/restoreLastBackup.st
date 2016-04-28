@@ -1,4 +1,4 @@
-restoring
+saving
 restoreLastBackup
 
 	self restoreBackupVersion: self lastBackupVersion.

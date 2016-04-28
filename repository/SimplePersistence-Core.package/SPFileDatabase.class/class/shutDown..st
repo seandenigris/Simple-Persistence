@@ -1,3 +1,3 @@
-startup/shutdown
+private
 shutDown: isGoingDown 
 	isGoingDown ifTrue: [ self saveRepository ]

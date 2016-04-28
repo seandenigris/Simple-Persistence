@@ -1,3 +1,3 @@
-startup/shutdown
+private
 startUp: isComingUp 
 	isComingUp ifTrue: [ self restoreLastBackup ]

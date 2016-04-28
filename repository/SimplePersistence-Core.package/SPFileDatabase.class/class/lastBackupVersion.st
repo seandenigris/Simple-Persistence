@@ -1,8 +1,8 @@
-private
+override in subclasses
 lastBackupVersion
 
 	| lastBackupFile |
-	lastBackupFile := self backupDirectory files detectMax: [:each | self versionOf: each].
+	lastBackupFile := self backupFiles detectMax: [:each | self versionOf: each].
 	^ lastBackupFile isNil
 		ifTrue: [ 0 ]
 		ifFalse: [ self versionOf: lastBackupFile ].

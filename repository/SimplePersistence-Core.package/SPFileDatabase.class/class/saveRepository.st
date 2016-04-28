@@ -1,4 +1,4 @@
-saving
+setting up
 saveRepository
 	| version |
 	lock ifNil: [ lock := Semaphore forMutualExclusion ].

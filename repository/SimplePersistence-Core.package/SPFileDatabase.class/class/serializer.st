@@ -1,4 +1,4 @@
-private
+override in subclasses
 serializer
 	"See SpSerializer class comment"
 
