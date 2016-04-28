@@ -1,0 +1,14 @@
+{
+	"category" : "BaselineOfSimplePersistence",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BaselineOfSimplePersistence",
+	"pools" : [
+		 ],
+	"super" : "BaselineOf",
+	"type" : "normal" }
