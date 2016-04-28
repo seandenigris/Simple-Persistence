@@ -2,11 +2,12 @@
 	"class" : {
 		"createFor:persisting:" : "SeanDeNigris 2/4/2013 10:21" },
 	"instance" : {
+		"addBackupDirectoryHook" : "SeanDeNigris 7/10/2015 16:52",
 		"addInitializer" : "SeanDeNigris 2/4/2013 10:31",
 		"addRepositoryAccessorFor:of:" : "SeanDeNigris 5/1/2015 10:50",
 		"addRestorationMethodFor:" : "SeanDeNigris 5/1/2015 10:50",
 		"addSaveRepositoryScript" : "SeanDeNigris 5/31/2015 14:13",
 		"containerClass:" : "SeanDeNigris 2/4/2013 10:25",
-		"create" : "SeanDeNigris 2/4/2013 10:32",
+		"create" : "SeanDeNigris 7/10/2015 16:49",
 		"databaseClass" : "SeanDeNigris 2/4/2013 10:33",
 		"instVarName:" : "SeanDeNigris 2/4/2013 10:25" } }

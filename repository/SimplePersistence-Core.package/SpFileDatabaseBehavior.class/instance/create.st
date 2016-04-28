@@ -4,4 +4,5 @@ create
 	self
 		addInitializer;
 		addRepositoryAccessorFor: instVarName of: containerClass;
-		addRestorationMethodFor: containerClass.
+		addRestorationMethodFor: containerClass;
+		addBackupDirectoryHook.
