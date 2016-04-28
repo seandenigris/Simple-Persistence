@@ -3,7 +3,7 @@ baseline: spec
 	<baseline>
 
 	spec for: #common do: [
-		spec description: '- Add Platform package for Pharo 2.0'.
+		spec description: 'Adapted from 3.0.1-baseline of ConfigurationOf from StHub repo'.
 		spec 
 			package: 'SimplePersistence-Core';
 			package: 'SimplePersistence-Tests' with: [
