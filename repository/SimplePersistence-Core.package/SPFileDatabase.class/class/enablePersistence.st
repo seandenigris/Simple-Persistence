@@ -1,4 +1,3 @@
 private
 enablePersistence
-	Smalltalk addToStartUpList: self.
-	Smalltalk addToShutDownList: self
+	SessionManager default registerUserClassNamed: self name

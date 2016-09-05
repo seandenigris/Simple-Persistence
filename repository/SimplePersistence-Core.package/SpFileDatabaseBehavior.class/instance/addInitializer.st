@@ -4,6 +4,4 @@ addInitializer
 
 	self databaseClass class compile:
 'initialize
-
-	self restoreLastBackup.
-	self enablePersistence' classified: 'class initialization'.
+	self setUp.' classified: 'class initialization'.

@@ -3,7 +3,7 @@
 		"createFor:persisting:" : "SeanDeNigris 2/4/2013 10:21" },
 	"instance" : {
 		"addBackupDirectoryHook" : "SeanDeNigris 7/10/2015 16:52",
-		"addInitializer" : "SeanDeNigris 2/4/2013 10:31",
+		"addInitializer" : "SeanDeNigris 9/4/2016 21:40",
 		"addRepositoryAccessorFor:of:" : "SeanDeNigris 5/1/2015 10:50",
 		"addRestorationMethodFor:" : "SeanDeNigris 5/1/2015 10:50",
 		"addRestoreScript" : "SeanDeNigris 4/19/2016 10:26",
