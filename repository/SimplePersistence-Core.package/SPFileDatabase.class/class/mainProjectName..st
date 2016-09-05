@@ -1,3 +1,4 @@
 accessing
 mainProjectName: anObject
-	MainProjectName := anObject
+	"The first one here gets to be the main project!"
+	MainProjectName ifNil: [ MainProjectName := anObject ]
