@@ -1,16 +1,19 @@
 {
-	"class" : {
-		"open" : "SeanDeNigris 4/13/2013 09:18",
-		"spec" : "SeanDeNigris 4/13/2013 11:27",
-		"title" : "SeanDeNigris 4/13/2013 10:12" },
 	"instance" : {
 		"classDefinition" : "SeanDeNigris 4/13/2013 11:26",
-		"classesPossiblyNeedingPersistence" : "SeanDeNigris 4/13/2013 11:07",
-		"classesPossiblyNeedingPersistenceIn:" : "SeanDeNigris 4/13/2013 11:14",
-		"initializePresenter" : "SeanDeNigris 4/13/2013 11:27",
-		"initializeWidgets" : "SeanDeNigris 4/13/2013 11:21",
 		"listModel" : "SeanDeNigris 4/13/2013 10:28",
-		"noDbPersists:" : "SeanDeNigris 4/13/2013 11:17",
-		"okButton" : "SeanDeNigris 4/13/2013 09:18",
+		"initializePresenter" : "SeanDeNigris 4/13/2013 11:27",
 		"packages" : "SeanDeNigris 4/13/2013 11:08",
-		"persistenceClasses" : "SeanDeNigris 4/13/2013 11:18" } }
+		"initializeWidgets" : "SeanDeNigris 4/13/2013 11:21",
+		"persistenceClasses" : "SeanDeNigris 4/13/2013 11:18",
+		"noDbPersists:" : "SeanDeNigris 4/13/2013 11:17",
+		"classesPossiblyNeedingPersistence" : "SeanDeNigris 4/13/2013 11:07",
+		"okButton" : "SeanDeNigris 4/13/2013 09:18",
+		"classesPossiblyNeedingPersistenceIn:" : "SeanDeNigris 4/13/2013 11:14"
+	},
+	"class" : {
+		"spec" : "SeanDeNigris 4/13/2013 11:27",
+		"title" : "SeanDeNigris 4/13/2013 10:12",
+		"open" : "SeanDeNigris 4/13/2013 09:18"
+	}
+}

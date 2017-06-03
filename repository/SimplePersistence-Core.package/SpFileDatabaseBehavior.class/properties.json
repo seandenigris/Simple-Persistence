@@ -1,16 +1,15 @@
 {
-	"category" : "SimplePersistence-Core-Developer",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "SimplePersistence-Core-Developer",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"containerClass",
 		"instVarName",
-		"databaseClass" ],
+		"databaseClass"
+	],
 	"name" : "SpFileDatabaseBehavior",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

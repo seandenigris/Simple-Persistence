@@ -1,5 +1,6 @@
 {
+	"instance" : { },
 	"class" : {
-		"simplePersistenceClassMenu:" : "SeanDeNigris 4/1/2013 15:34" },
-	"instance" : {
-		 } }
+		"simplePersistenceClassMenu:" : "SeanDeNigris 4/1/2013 15:34"
+	}
+}

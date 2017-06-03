@@ -1,14 +1,11 @@
 {
-	"category" : "SimplePersistence-Core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "SeanDeNigris 2/1/2013 14:20",
-	"instvars" : [
-		 ],
-	"name" : "SpFuelSerializer",
-	"pools" : [
-		 ],
 	"super" : "SpSerializer",
-	"type" : "normal" }
+	"category" : "SimplePersistence-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SpFuelSerializer",
+	"type" : "normal"
+}

@@ -1,15 +1,16 @@
 {
+	"commentStamp" : "SeanDeNigris 5/29/2011 13:36",
+	"super" : "Object",
 	"category" : "SimplePersistence-Core",
 	"classinstvars" : [
-		"lock" ],
+		"lock"
+	],
+	"pools" : [ ],
 	"classvars" : [
 		"MainProjectName",
-		"RootDataFolder" ],
-	"commentStamp" : "SeanDeNigris 5/29/2011 13:36",
-	"instvars" : [
-		 ],
+		"RootDataFolder"
+	],
+	"instvars" : [ ],
 	"name" : "SpFileDatabase",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

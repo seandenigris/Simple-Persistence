@@ -1,3 +1,4 @@
 restoring
 restoreBackupVersion: aNumber
-	(self backupVersion: aNumber) ifNotNilDo: [ :backup | self restoreRepositories: backup ]
+	(self backupVersion: aNumber)
+		ifNotNil: [ :backup | self restoreRepositories: backup ]

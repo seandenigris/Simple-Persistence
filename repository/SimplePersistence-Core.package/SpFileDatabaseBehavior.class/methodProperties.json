@@ -1,17 +1,20 @@
 {
-	"class" : {
-		"createFor:persisting:" : "SeanDeNigris 2/4/2013 10:21" },
 	"instance" : {
-		"addBackupDirectoryHook" : "SeanDeNigris 7/10/2015 16:52",
-		"addInitializer" : "SeanDeNigris 9/4/2016 21:40",
+		"addRootDataFolder" : "SeanDeNigris 4/28/2016 09:28",
+		"containerClass:" : "SeanDeNigris 2/4/2013 10:25",
 		"addRepositoryAccessorFor:of:" : "SeanDeNigris 5/1/2015 10:50",
 		"addRestorationMethodFor:" : "SeanDeNigris 5/1/2015 10:50",
 		"addRestoreScript" : "SeanDeNigris 4/19/2016 10:26",
-		"addRootDataFolder" : "SeanDeNigris 4/28/2016 09:28",
-		"addSaveScript" : "SeanDeNigris 4/19/2016 10:27",
-		"containerClass:" : "SeanDeNigris 2/4/2013 10:25",
-		"create" : "SeanDeNigris 4/19/2016 10:29",
-		"databaseClass" : "SeanDeNigris 2/4/2013 10:33",
-		"databaseClass:" : "SeanDeNigris 4/28/2016 09:27",
+		"rootDataFolderRecipe" : "SeanDeNigris 4/28/2016 09:26",
 		"instVarName:" : "SeanDeNigris 2/4/2013 10:25",
-		"rootDataFolderRecipe" : "SeanDeNigris 4/28/2016 09:26" } }
+		"create" : "SeanDeNigris 4/19/2016 10:29",
+		"addBackupDirectoryHook" : "SeanDeNigris 7/10/2015 16:52",
+		"databaseClass:" : "SeanDeNigris 4/28/2016 09:27",
+		"databaseClass" : "SeanDeNigris 2/4/2013 10:33",
+		"addInitializer" : "SeanDeNigris 9/4/2016 21:40",
+		"addSaveScript" : "SeanDeNigris 4/19/2016 10:27"
+	},
+	"class" : {
+		"createFor:persisting:" : "SeanDeNigris 2/4/2013 10:21"
+	}
+}
