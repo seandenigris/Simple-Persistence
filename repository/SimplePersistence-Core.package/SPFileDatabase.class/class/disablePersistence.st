@@ -1,3 +1,0 @@
-private
-disablePersistence
-	SessionManager default unregisterClassNamed: self name
