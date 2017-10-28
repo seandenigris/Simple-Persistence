@@ -14,4 +14,3 @@ That's it! Now, whenever you want to save, call class>>saveRepository or class>>
 
 To customize:
 * Number of backups kept: override class>>defaultHistoryCount
-			
