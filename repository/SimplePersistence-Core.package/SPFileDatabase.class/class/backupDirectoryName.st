@@ -1,4 +1,0 @@
-accessing
-backupDirectoryName
-
-	^self name

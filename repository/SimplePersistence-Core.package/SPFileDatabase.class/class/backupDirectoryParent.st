@@ -1,3 +1,0 @@
-accessing
-backupDirectoryParent
-	^ self rootDataFolder
