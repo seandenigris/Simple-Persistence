@@ -1,0 +1,4 @@
+accessing
+backupDirectoryName
+
+	^self name
