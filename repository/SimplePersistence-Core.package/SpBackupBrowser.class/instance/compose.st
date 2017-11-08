@@ -19,7 +19,9 @@ compose
 				populate: #acceptedCode icon: GLMUIThemeExtraIcons glamorousAccept on: $s entitled: 'Accept' with: [:text | Compiler evaluate: text text ] ].
 		browser transmit to: #dbs; andShow: [ :a | 
 			a list
-				act: [ :list | list selection togglePersistence. list update ] on: $t entitled: 'Toggle';
+				act: [ :list | list selection togglePersistence. list update ] on: $t entitled: 'Toggle Persistence';
+				act: [ :list | list selection beMainProject. list update ] on: $m entitled: 'Be main project';
+				act: [ :list | list selection restoreLastBackup ] on: $r entitled: 'Restore';
 				icon: [ :db | 
 						db isPersistenceEnabled
 							ifTrue: [ Smalltalk ui icons testGreen ] 
