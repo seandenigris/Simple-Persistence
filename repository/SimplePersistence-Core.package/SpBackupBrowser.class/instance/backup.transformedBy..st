@@ -1,4 +1,4 @@
-*SimplePersistence-Core-Developer
+as yet unclassified
 backup: root transformedBy: aBlock
 	root ifNil: [ ^ root ].
 	aBlock ifNil: [ ^ root ].

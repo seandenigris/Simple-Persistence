@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "RBBlockLintRule",
-	"category" : "SimplePersistence-Core",
+	"category" : "SimplePersistence-Core-Developer",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
