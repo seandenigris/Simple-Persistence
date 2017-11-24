@@ -19,9 +19,9 @@ compose
 				populate: #acceptedCode icon: GLMUIThemeExtraIcons glamorousAccept on: $s entitled: 'Accept' with: [:text | Compiler evaluate: text text ] ].
 		browser transmit to: #dbs; andShow: [ :a | 
 			a list
-				act: [ :list | list selection togglePersistence. list update ] on: $t entitled: 'Toggle Persistence';
-				act: [ :list | list selection beMainProject. list update ] on: $m entitled: 'Be main project';
-				act: [ :list | list selection restoreLastBackup ] on: $r entitled: 'Restore';
+				selectionAct: [ :list | list selection togglePersistence. list update ] on: $t entitled: 'Toggle Persistence';
+				selectionAct: [ :list | list selection beMainProject. list update ] on: $m entitled: 'Be main project';
+				selectionAct: [ :list | list selection restoreLastBackup ] on: $r entitled: 'Restore Last Backup';
 				icon: [ :db | 
 						db isPersistenceEnabled
 							ifTrue: [ Smalltalk ui icons testGreen ] 
@@ -36,7 +36,7 @@ compose
 			andShow: [ :a :db | 
 				a list
 					title: 'Backups';
-					"act: [ :list :b :c | Halt now. db list selection togglePersistence. list update ] on: $t entitled: 'Load';"
+					selectionAct: [ :list | db restoreBackupVersion: list rawSelection ] on: $r entitled: 'Restore';
 					display: [ db availableVersions sorted reversed ];
 					send: [ :version | [ db backupVersion: version ] on: Error do: [ :e | e ] ] ].
 		browser transmit
