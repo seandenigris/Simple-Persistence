@@ -19,9 +19,8 @@ compose
 				populate: #acceptedCode icon: GLMUIThemeExtraIcons glamorousAccept on: $s entitled: 'Accept' with: [:text | Compiler evaluate: text text ] ].
 		browser transmit to: #dbs; andShow: [ :a | 
 			a list
-				selectionAct: [ :list | list selection togglePersistence. list update ] on: $t entitled: 'Toggle Persistence';
-				selectionAct: [ :list | list selection beMainProject. list update ] on: $m entitled: 'Be main project';
-				selectionAct: [ :list | list selection restoreLastBackup ] on: $r entitled: 'Restore Last Backup';
+				maAddSelectionActionsFor: SpFileDatabase;
+				selectionAct: [ :list | list selection inspect ] on: $i entitled: 'Inspect';
 				icon: [ :db | 
 						db isPersistenceEnabled
 							ifTrue: [ Smalltalk ui icons testGreen ] 
