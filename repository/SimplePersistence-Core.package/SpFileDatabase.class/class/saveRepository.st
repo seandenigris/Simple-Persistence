@@ -1,5 +1,6 @@
 saving
 saveRepository
+	<script>
 	| version |
 	lock ifNil: [ lock := Semaphore forMutualExclusion ].
 	lock critical: [

@@ -1,4 +1,4 @@
-as yet unclassified
+registration
 beMainProject
 	| projectName |
 	projectName := self name allButLast: 'DB' size.
