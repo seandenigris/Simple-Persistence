@@ -1,4 +1,4 @@
-as yet unclassified
+private
 backup: root transformedBy: aBlock
 	root ifNil: [ ^ root ].
 	aBlock ifNil: [ ^ root ].
