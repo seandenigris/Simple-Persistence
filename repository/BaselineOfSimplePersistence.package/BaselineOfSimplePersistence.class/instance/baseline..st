@@ -1,11 +1,13 @@
-as yet unclassified
+baselines
 baseline: spec
 	<baseline>
 
 	spec for: #common do: [
-		spec description: 'Adapted from 3.0.1-baseline of ConfigurationOf from StHub repo'.
-		spec 
-			package: 'SimplePersistence-Core';
+		spec
+			baseline: 'Magritte3' with: [
+				spec repository: 'github://seandenigris/Magritte3:original_master/repository' ];
+			package: 'SimplePersistence-Core' with: [
+				spec requires: #('Magritte3' "for browser"). ];
 			package: 'SimplePersistence-Tests' with: [
 				spec requires: #('SimplePersistence-Core' ). ].
 		spec 
