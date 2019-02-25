@@ -4,10 +4,10 @@ baseline: spec
 
 	spec for: #common do: [
 		spec
-			baseline: 'Magritte3' with: [
-				spec repository: 'github://seandenigris/Magritte3:original_master/repository' ];
+			baseline: 'Magritte' with: [
+				spec repository: 'github://seandenigris/Magritte:master/source' ];
 			package: 'SimplePersistence-Core' with: [
-				spec requires: #('Magritte3' "for browser"). ];
+				spec requires: #('Magritte' "for browser"). ];
 			package: 'SimplePersistence-Tests' with: [
 				spec requires: #('SimplePersistence-Core' ). ].
 		spec 
