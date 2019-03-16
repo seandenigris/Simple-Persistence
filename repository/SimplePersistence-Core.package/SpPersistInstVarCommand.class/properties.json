@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "SycSingleClassCommand",
+	"category" : "SimplePersistence-Core-Developer",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SpPersistInstVarCommand",
+	"type" : "normal"
+}
