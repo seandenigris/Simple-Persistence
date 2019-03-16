@@ -34,8 +34,8 @@ compose
 							entitled: 'Inspect';
 						icon: [ :db | 
 							db isPersistenceEnabled
-								ifTrue: [ #testGreen asIcon ]
-								ifFalse: [ #testNotRun asIcon ] ];
+								ifTrue: [ self iconNamed: #testGreen ]
+								ifFalse: [ self iconNamed: #testNotRun ] ];
 						format: [ :db | 
 							db isMainProject
 								ifTrue: [ db asString asText allBold ]
