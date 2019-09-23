@@ -23,7 +23,7 @@ compose
 							icon: GLMUIThemeExtraIcons glamorousAccept
 							on: $s
 							entitled: 'Accept'
-							with: [ :text | Compiler evaluate: text text ] ].
+							with: [ :text | Smalltalk compiler evaluate: text text ] ].
 			browser transmit
 				to: #dbs;
 				andShow: [ :a | 
