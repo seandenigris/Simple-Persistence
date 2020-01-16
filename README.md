@@ -37,3 +37,6 @@ Metacello new
 		uniqueInstance := aCollection first.
 		tags := aCollection second.
 	```
+
+# Users
+- [Resources-Live](https://github.com/seandenigris/Resources-Live) - see `ResourcesLiveDB` and clients
