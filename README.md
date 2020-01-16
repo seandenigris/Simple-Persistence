@@ -4,7 +4,7 @@
 
 Most applications are designed for small businesses with small amounts of data. Therefore *most applications will never have to scale* (i.e. become the next Twitter), so *a relational database is overkill*. However, persisting by simply saving the image is slow and error-prone. This simple (one class) framework saves only your model. The idea is to use it as long as you can get away with, which may be forever!
 
-This repository carries on the original work by Ramon Leon (@gnaritas), which started as this [an enlightening blog post](http://onsmalltalk.com/simple-image-based-persistence-in-squeak/).
+This repository carries on the original work by Ramon Leon ([@gnaritas](https://github.com/gnaritas)), which started as this [an enlightening blog post](http://onsmalltalk.com/simple-image-based-persistence-in-squeak/).
 
 ## Installation
 ```smalltalk
