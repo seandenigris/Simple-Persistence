@@ -1,3 +1,0 @@
-private
-enablePersistence
-	SessionManager default registerUserClassNamed: self name
