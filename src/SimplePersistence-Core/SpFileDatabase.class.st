@@ -27,7 +27,7 @@ Class {
 	#classInstVars : [
 		'lock'
 	],
-	#category : 'SimplePersistence-Core'
+	#category : #'SimplePersistence-Core'
 }
 
 { #category : #private }
@@ -347,4 +347,16 @@ SpFileDatabase class >> trimBackups [
 { #category : #private }
 SpFileDatabase class >> versionOf: backupFile [
 	^ backupFile extension asInteger.
+]
+
+{ #category : #'Magritte-actions' }
+SpFileDatabase class >> viewDataDescription [
+	<magritteActionDescription>
+	
+	^ MAActionDescription new
+			action: [ :db | db spData inspect ];
+			label: 'View Data';
+			isMutator: false;
+			shortcut: #v asShortcut;
+			yourself
 ]
