@@ -27,7 +27,7 @@ Class {
 	#classInstVars : [
 		'lock'
 	],
-	#category : 'SimplePersistence-Core'
+	#category : #'SimplePersistence-Core'
 }
 
 { #category : #private }
@@ -160,6 +160,16 @@ SpFileDatabase class >> descriptionTogglePersistence [
 			isMutator: true;
 			shortcut: $t asShortcut;
 			yourself
+]
+
+{ #category : #'Magritte-actions' }
+SpFileDatabase class >> descriptionViewBackupDirectory [
+	<magritteActionDescription>
+	
+	^ MAActionDescription new
+			action: #viewBackupDirectory;
+			shortcut: $v asShortcut;
+			yourself.
 ]
 
 { #category : #private }
@@ -347,4 +357,9 @@ SpFileDatabase class >> trimBackups [
 { #category : #private }
 SpFileDatabase class >> versionOf: backupFile [
 	^ backupFile extension asInteger.
+]
+
+{ #category : #viewing }
+SpFileDatabase class >> viewBackupDirectory [
+	self backupDirectory open
 ]
