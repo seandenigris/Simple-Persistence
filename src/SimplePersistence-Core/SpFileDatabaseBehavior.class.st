@@ -6,7 +6,7 @@ Class {
 		'instVarName',
 		'databaseClass'
 	],
-	#category : 'SimplePersistence-Core-Developer'
+	#category : #'SimplePersistence-Core-Developer'
 }
 
 { #category : #'setting up' }
@@ -31,15 +31,6 @@ SpFileDatabaseBehavior >> addBackupDirectoryHook [
 ]
 
 { #category : #'setting up' }
-SpFileDatabaseBehavior >> addInitializer [
-	"Call on subclasses to add class initialization"
-
-	self databaseClass class compile:
-'initialize
-	self setUp.' classified: 'class initialization'.
-]
-
-{ #category : #'setting up' }
 SpFileDatabaseBehavior >> addRepositoryAccessorFor: aSymbol of: aClass [ 
 
 	| template source |
@@ -48,50 +39,6 @@ SpFileDatabaseBehavior >> addRepositoryAccessorFor: aSymbol of: aClass [
 
 	^ \{ {1} {2} \}.'.
 	source := template format: { aClass name. aSymbol }.
-	self databaseClass class compile: source classified: 'loading/saving'.
-]
-
-{ #category : #'setting up' }
-SpFileDatabaseBehavior >> addRestorationMethodFor: aClass [ 
-
-	| template source |
-	template := 
-'restoreRepositories: someRepositories
-
-	{1} restoreFrom: someRepositories first.'.
-	source := template format: { aClass name }.
-	self databaseClass class compile: source classified: 'loading/saving'.
-]
-
-{ #category : #'setting up' }
-SpFileDatabaseBehavior >> addRestoreScript [
-
-	| source |
-	source := 
-'restoreLastBackup
-	<script>
-	^ super restoreLastBackup'.
-	self databaseClass class compile: source classified: 'loading/saving'.
-]
-
-{ #category : #'setting up' }
-SpFileDatabaseBehavior >> addRootDataFolder [
-
-	| sourceTemplate source |
-	sourceTemplate := 'rootDataFolder
-	^ {fileReference}'.
-	source := sourceTemplate format: { #fileReference -> self rootDataFolderRecipe } asDictionary.
-	self databaseClass class compile: source classified: 'accessing'.
-]
-
-{ #category : #'setting up' }
-SpFileDatabaseBehavior >> addSaveScript [
-
-	| source |
-	source := 
-'saveRepository
-	<script>
-	^ super saveRepository'.
 	self databaseClass class compile: source classified: 'loading/saving'.
 ]
 
@@ -104,13 +51,9 @@ SpFileDatabaseBehavior >> containerClass: aClass [
 { #category : #API }
 SpFileDatabaseBehavior >> create [
 
-	self
-		addInitializer;
-		addRepositoryAccessorFor: instVarName of: containerClass;
-		addRestorationMethodFor: containerClass;
+	self 
 		addBackupDirectoryHook;
-		addSaveScript;
-		addRestoreScript.
+		updateSchema.
 ]
 
 { #category : #'setting up' }
@@ -141,7 +84,18 @@ SpFileDatabaseBehavior >> instVarName: aSymbol [
 	instVarName := aSymbol.
 ]
 
-{ #category : #private }
-SpFileDatabaseBehavior >> rootDataFolderRecipe [
-	^ String streamContents: [:s | SpFileDatabase rootDataFolder storeOn: s ]
+{ #category : #'setting up' }
+SpFileDatabaseBehavior >> updateSchema [
+
+	| source classes sortedClasses |
+	classes := Set with: containerClass.
+	(databaseClass respondsTo: #schema) ifTrue: [ classes addAll: databaseClass schema ].
+	sortedClasses := classes asSortedCollection: [ :a :b | a name < b name ].
+	source := String streamContents: [ :str |
+		str 
+			nextPutAll: 'schema'; cr; cr;
+			tab; nextPutAll: '^ {'.
+		sortedClasses do: [ :c | str tab; tab; tab; nextPutAll: c name; nextPut: $.; cr ].
+		str tab; tab; nextPutAll: '}.'. ].
+	self databaseClass class compile: source classified: 'loading/saving'.
 ]

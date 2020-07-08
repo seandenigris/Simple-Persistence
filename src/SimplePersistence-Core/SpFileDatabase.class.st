@@ -363,3 +363,15 @@ SpFileDatabase class >> versionOf: backupFile [
 SpFileDatabase class >> viewBackupDirectory [
 	self backupDirectory open
 ]
+
+{ #category : #'Magritte-actions' }
+SpFileDatabase class >> viewDataDescription [
+	<magritteActionDescription>
+	
+	^ MAActionDescription new
+			action: [ :db | db spData inspect ];
+			label: 'View Data';
+			isMutator: false;
+			shortcut: #v asShortcut;
+			yourself
+]
