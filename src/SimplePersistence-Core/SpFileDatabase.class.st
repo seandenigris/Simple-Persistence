@@ -27,7 +27,7 @@ Class {
 	#classInstVars : [
 		'lock'
 	],
-	#category : #'SimplePersistence-Core'
+	#category : #'SimplePersistence-Core-Core'
 }
 
 { #category : #private }
@@ -180,6 +180,23 @@ SpFileDatabase class >> disablePersistence [
 { #category : #private }
 SpFileDatabase class >> enablePersistence [
 	SessionManager default registerUserClassNamed: self name
+]
+
+{ #category : #GToolkit }
+SpFileDatabase class >> gtBasicFor: aView [
+	<gtView>
+	<gtClassView>
+	self isAbstract ifTrue: [ ^ aView empty ].
+	^ aView forward 
+		title: 'Data';
+		priority: -9;
+		object: [ self spData ];
+		view: #gtItemsFor:
+]
+
+{ #category : #accessing }
+SpFileDatabase class >> isAbstract [
+	^ self name = #SpFileDatabase
 ]
 
 { #category : #testing }

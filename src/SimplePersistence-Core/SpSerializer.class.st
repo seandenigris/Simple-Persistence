@@ -4,7 +4,7 @@ I am used by SpFileDatabase to do the actual serialization and materialization. 
 Class {
 	#name : #SpSerializer,
 	#superclass : #Object,
-	#category : 'SimplePersistence-Core'
+	#category : #'SimplePersistence-Core-Core'
 }
 
 { #category : #protocol }

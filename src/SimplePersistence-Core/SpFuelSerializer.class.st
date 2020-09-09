@@ -8,7 +8,7 @@ See http://rmod.lille.inria.fr/web/pier/software/Fuel for more details.
 Class {
 	#name : #SpFuelSerializer,
 	#superclass : #SpSerializer,
-	#category : 'SimplePersistence-Core'
+	#category : #'SimplePersistence-Core-Core'
 }
 
 { #category : #protocol }
