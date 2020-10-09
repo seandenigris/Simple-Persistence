@@ -30,18 +30,6 @@ SpFileDatabaseBehavior >> addBackupDirectoryHook [
 	self databaseClass class compile: source classified: 'accessing'.
 ]
 
-{ #category : #'setting up' }
-SpFileDatabaseBehavior >> addRepositoryAccessorFor: aSymbol of: aClass [ 
-
-	| template source |
-	template := 
-'repositories
-
-	^ \{ {1} {2} \}.'.
-	source := template format: { aClass name. aSymbol }.
-	self databaseClass class compile: source classified: 'loading/saving'.
-]
-
 { #category : #private }
 SpFileDatabaseBehavior >> containerClass: aClass [
 
@@ -89,12 +77,12 @@ SpFileDatabaseBehavior >> updateSchema [
 
 	| source classes sortedClasses |
 	classes := Set with: containerClass.
-	(databaseClass respondsTo: #schema) ifTrue: [ classes addAll: databaseClass schema ].
+	(databaseClass class includesLocalSelector: #schema) ifTrue: [ classes addAll: databaseClass schema ].
 	sortedClasses := classes asSortedCollection: [ :a :b | a name < b name ].
 	source := String streamContents: [ :str |
 		str 
 			nextPutAll: 'schema'; cr; cr;
-			tab; nextPutAll: '^ {'.
+			tab; nextPutAll: '^ {'; cr.
 		sortedClasses do: [ :c | str tab; tab; tab; nextPutAll: c name; nextPut: $.; cr ].
 		str tab; tab; nextPutAll: '}.'. ].
 	self databaseClass class compile: source classified: 'loading/saving'.

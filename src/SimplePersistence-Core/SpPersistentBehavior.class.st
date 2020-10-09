@@ -1,27 +1,70 @@
 Class {
 	#name : #SpPersistentBehavior,
 	#superclass : #Object,
-	#classInstVars : [
-		'persistedClass',
-		'persistedInstance'
+	#instVars : [
+		'subjectClass',
+		'variableName',
+		'targetClass'
 	],
-	#category : 'SimplePersistence-Core-Developer'
+	#category : #'SimplePersistence-Core-Developer'
 }
 
-{ #category : #'as yet unclassified' }
-SpPersistentBehavior class >> addTo: aClass for: aSymbol [ 
-
-	^ self new addTo: aClass for: aSymbol.
+{ #category : #convenience }
+SpPersistentBehavior class >> addTo: aClass for: aSymbol [
+	^ self new
+		class: aClass;
+		variableName: aSymbol;
+		add
 ]
 
-{ #category : #'as yet unclassified' }
-SpPersistentBehavior >> addTo: aClass for: aSymbol [ 
+{ #category : #API }
+SpPersistentBehavior >> add [
+	| methodsExist |
+	methodsExist := #(spData restoreFrom:)
+		anySatisfy: [ :sel | self targetClass class includesLocalSelector: sel ].
+	methodsExist ifTrue: [ self error: 'Boilerplate can only be added for first variable for a class. After that you must edit the methods manually' ].
+	self addGetter.
+	self addSetter
+]
 
-	| template source |
-	template := 
-'restoreFrom: anObject
+{ #category : #private }
+SpPersistentBehavior >> addGetter [
+	self addMethodFromTemplate: 'spData
 
-	{1} := anObject.'.
-	source := template format: { aSymbol }.
-	aClass class compile: source classified: 'persistence'.
+	^ {1}.'
+]
+
+{ #category : #private }
+SpPersistentBehavior >> addMethodFromTemplate: template [
+	| source |
+	source := template format: { self variableName }.
+	self targetClass class compile: source classified: 'persistence'
+]
+
+{ #category : #private }
+SpPersistentBehavior >> addSetter [
+
+	self addMethodFromTemplate: 'restoreFrom: anObject
+
+	{1} := anObject.'
+]
+
+{ #category : #accessing }
+SpPersistentBehavior >> targetClass [
+	^ targetClass
+]
+
+{ #category : #accessing }
+SpPersistentBehavior >> targetClass: aClass [
+	targetClass := aClass
+]
+
+{ #category : #accessing }
+SpPersistentBehavior >> variableName [
+	^ variableName
+]
+
+{ #category : #accessing }
+SpPersistentBehavior >> variableName: aSymbol [
+	variableName := aSymbol
 ]
