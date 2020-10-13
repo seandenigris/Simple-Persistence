@@ -84,35 +84,10 @@ SpFileDatabase class >> backupVersion: aNumber [
 	^ self serializer materializeFrom: backup.
 ]
 
-{ #category : #private }
-SpFileDatabase class >> basicSetUp [
-	self restoreLastBackup.
-	self enablePersistence
-]
-
-{ #category : #registration }
-SpFileDatabase class >> beMainProject [
-	| projectName |
-	projectName := self name allButLast: 'DB' size.
-	self mainProjectName: projectName
-]
-
 { #category : #accessing }
 SpFileDatabase class >> defaultHistoryCount [
 	"How many backups to keep."
 	^ 50
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> descriptionBeMainProject [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #beMainProject;
-			label: 'Be main project';
-			isMutator: true;
-			shortcut: $m asShortcut;
-			yourself
 ]
 
 { #category : #'Magritte-actions' }
@@ -200,16 +175,6 @@ SpFileDatabase class >> isAbstract [
 ]
 
 { #category : #testing }
-SpFileDatabase class >> isLibrary [
-	^ self isMainProject not
-]
-
-{ #category : #testing }
-SpFileDatabase class >> isMainProject [
-	^ self mainProjectName isNotNil and: [ self mainProjectName = self projectName ]
-]
-
-{ #category : #testing }
 SpFileDatabase class >> isPersistenceEnabled [
 	^ SessionManager default hasRegistered: self name
 ]
@@ -223,16 +188,6 @@ SpFileDatabase class >> lastBackupVersion [
 		ifTrue: [ 0 ]
 		ifFalse: [ self versionOf: lastBackupFile ].
 	
-]
-
-{ #category : #accessing }
-SpFileDatabase class >> mainProjectName [
-	^ MainProjectName
-]
-
-{ #category : #accessing }
-SpFileDatabase class >> mainProjectName: anObject [
-	MainProjectName := anObject
 ]
 
 { #category : #'*SimplePersistence-Core-Developer' }
@@ -257,14 +212,6 @@ SpFileDatabase class >> persist: aSymbol in: aClass [
 { #category : #accessing }
 SpFileDatabase class >> projectName [
 	^ self name allButLast: 2
-]
-
-{ #category : #registration }
-SpFileDatabase class >> register: aBaselineOfClass [
-	"The first one here gets to be the main project! All other projects persisted by SimplePersistence will be in library-mode i.e. defer to the main project to handle saving and restoring. This is important to keep object graphs intact"
-	
-	self mainProjectName ifNotNil: [ ^ self ].
-	self mainProjectName: (aBaselineOfClass class name allButFirst: 'BaselineOf' size)
 ]
 
 { #category : #restoring }
@@ -325,8 +272,8 @@ SpFileDatabase class >> serializer [
 
 { #category : #private }
 SpFileDatabase class >> setUp [
-	self isLibrary ifTrue: [ ^ self ].
-	self basicSetUp
+	self restoreLastBackup.
+	self enablePersistence
 ]
 
 { #category : #'system startup' }
