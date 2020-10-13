@@ -1,7 +1,7 @@
 Class {
 	#name : #SpBackupBrowser,
 	#superclass : #GLMCompositePresentation,
-	#category : 'SimplePersistence-Core-Developer'
+	#category : #'SimplePersistence-Core-Developer'
 }
 
 { #category : #'as yet unclassified' }
@@ -55,10 +55,7 @@ SpBackupBrowser >> compose [
 							db isPersistenceEnabled
 								ifTrue: [ self iconNamed: #testGreen ]
 								ifFalse: [ self iconNamed: #testNotRun ] ];
-						format: [ :db | 
-							db isMainProject
-								ifTrue: [ db asString asText allBold ]
-								ifFalse: [ db asString ] ] ].
+						format: [ :db | db asString ] ].
 			browser transmit
 				from: #dbs;
 				to: #backups;
