@@ -1,15 +1,6 @@
 Extension { #name : #SpFileDatabase }
 
 { #category : #'*SimplePersistence-Core-Developer' }
-SpFileDatabase class >> backupBrowser [
-	<script>
-	
-	| dbs |
-	dbs := self subclasses.
-	SpBackupBrowser openOn: dbs
-]
-
-{ #category : #'*SimplePersistence-Core-Developer' }
 SpFileDatabase class >> menuCommandOn: aBuilder [ 
 	<worldMenu> 
 	

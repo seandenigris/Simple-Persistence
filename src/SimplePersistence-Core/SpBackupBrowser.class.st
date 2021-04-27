@@ -47,7 +47,7 @@ SpBackupBrowser >> compose [
 				to: #dbs;
 				andShow: [ :a | 
 					a list
-						maAddSelectionActionsFor: SpFileDatabase;
+						"maAddSelectionActionsFor: SpFileDatabase;"
 						selectionAct: [ :list | list selection inspect ]
 							on: $i
 							entitled: 'Inspect';
