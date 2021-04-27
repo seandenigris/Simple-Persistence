@@ -20,7 +20,7 @@ BaselineOfSimplePersistence >> baseline: spec [
 			group: 'Tests' with: #('SimplePersistence-Tests');
 			group: 'CI' with: #('Core' 'Tests');
 			group: 'Browser' with: #('CI' 'Magritte');
-			group: 'default' with: #('Core' ) ].
+			group: 'default' with: #('Tests' ) ].
 		
 	spec for: #'pharo2.x' do: [
 		spec 

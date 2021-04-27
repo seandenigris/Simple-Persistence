@@ -23,7 +23,7 @@ SimplePersistenceTests >> testSaveObjects [
 ]
 
 { #category : #'as yet unclassified' }
-SimplePersistenceTests >> testSaveObjectsInBackground2 [
+SimplePersistenceTests >> testSaveObjectsInBackground [
 	| db objectToStore anotherObjectToStore sem |
 	
 	db := SimplePersistenceTestDatabase.
