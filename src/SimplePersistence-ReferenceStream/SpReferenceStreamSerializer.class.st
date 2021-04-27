@@ -1,23 +1,19 @@
 Class {
 	#name : #SpReferenceStreamSerializer,
 	#superclass : #SpSerializer,
-	#category : 'SimplePersistence-ReferenceStream'
+	#category : #'SimplePersistence-ReferenceStream'
 }
 
 { #category : #protocol }
 SpReferenceStreamSerializer >> materializeFrom: aFileReference [
 
-	^ ReferenceStream 
-			readOnlyFileNamed: aFileReference fullName
-			do: [ : f | f next ].
+	^ aFileReference readStreamDo: [ : f | f next ].
 ]
 
 { #category : #protocol }
 SpReferenceStreamSerializer >> serialize: anObject to: aFileReference [
 
-	ReferenceStream 
-		newFileNamed: aFileReference fullName
-		do: [ :stream | 
+	aFileReference writeStreamDo: [ :stream | 
 				stream
 					nextPut: anObject;
 					flush ].

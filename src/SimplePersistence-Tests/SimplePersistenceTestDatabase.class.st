@@ -1,47 +1,20 @@
 Class {
 	#name : #SimplePersistenceTestDatabase,
 	#superclass : #SpFileDatabase,
-	#classInstVars : [
-		'number',
-		'string'
+	#classVars : [
+		'model'
 	],
-	#category : 'SimplePersistence-Tests'
+	#category : #'SimplePersistence-Tests'
 }
 
-{ #category : #accessing }
-SimplePersistenceTestDatabase class >> number [
-
-	^ number.
+{ #category : #'default model values' }
+SimplePersistenceTestDatabase class >> model [ 
+	
+	^SimplePersistenceModel default
 ]
 
-{ #category : #'as yet unclassified' }
-SimplePersistenceTestDatabase class >> repositories [
+{ #category : #api }
+SimplePersistenceTestDatabase class >> schema [
 
-	^ { number. string }
-]
-
-{ #category : #'as yet unclassified' }
-SimplePersistenceTestDatabase class >> reset [
-
-	number := string := nil.
-]
-
-{ #category : #'as yet unclassified' }
-SimplePersistenceTestDatabase class >> restoreRepositories: someRepositories [
-
-	number := someRepositories at: 1.
-	string := someRepositories at: 2.
-]
-
-{ #category : #'as yet unclassified' }
-SimplePersistenceTestDatabase class >> store: aNumber and: aString [
-
-	number := aNumber.
-	string := aString.
-]
-
-{ #category : #accessing }
-SimplePersistenceTestDatabase class >> string [
-
-	^ string.
+	^ { SimplePersistenceModel }
 ]

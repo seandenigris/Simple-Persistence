@@ -37,7 +37,7 @@ SpFileDatabase class >> availableVersions [
 		self versionOf: e ].
 ]
 
-{ #category : #'*SimplePersistence-Core-Developer' }
+{ #category : #restoring }
 SpFileDatabase class >> backupBrowser [
 	<script>
 	
@@ -88,63 +88,6 @@ SpFileDatabase class >> backupVersion: aNumber [
 SpFileDatabase class >> defaultHistoryCount [
 	"How many backups to keep."
 	^ 50
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> descriptionDisablePersistence [
-	"Disable while playing with #togglePersistence, which may replace me.
-	<magritteActionDescription>"
-	
-	^ MAActionDescription new
-			action: #disablePersistence;
-			enableBlock: [ :e | e isPersistenceEnabled ];
-			yourself
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> descriptionRestoreLastBackup [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #restoreLastBackup;
-			label: 'Restore Last Backup';
-			isMutator: false;
-			shortcut: $r asShortcut;
-			yourself
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> descriptionSaveRepository [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #saveRepository;
-			label: 'Save Repository';
-			isMutator: true;
-			shortcut: $s asShortcut;
-			yourself.
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> descriptionTogglePersistence [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #togglePersistence;
-			label: 'Toggle Persistence';
-			isMutator: true;
-			shortcut: $t asShortcut;
-			yourself
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> descriptionViewBackupDirectory [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #viewBackupDirectory;
-			shortcut: $v asShortcut;
-			yourself.
 ]
 
 { #category : #private }
@@ -245,12 +188,17 @@ SpFileDatabase class >> rootDataFolder: anObject [
 { #category : #saving }
 SpFileDatabase class >> saveRepository [
 	<script>
-	| version |
+	| version backupName |
 	lock ifNil: [ lock := Semaphore forMutualExclusion ].
-	lock critical: [
-		self trimBackups.
-		version := self lastBackupVersion + 1.
-		self serializer serialize: self spData to: self backupDirectory / self name, version asString ].
+	lock
+		critical: [
+			self trimBackups.
+			version := self lastBackupVersion + 1.
+			backupName := self backupDirectory / self name , version asString.
+			self serializer serialize: self spData to: backupName.
+		].
+	
+	SystemAnnouncer uniqueInstance announce: (SpSnapshotAnnouncement version: version name: backupName) 
 ]
 
 { #category : #accessing }
@@ -326,16 +274,4 @@ SpFileDatabase class >> versionOf: backupFile [
 { #category : #viewing }
 SpFileDatabase class >> viewBackupDirectory [
 	self backupDirectory open
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> viewDataDescription [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: [ :db | db spData inspect ];
-			label: 'View Data';
-			isMutator: false;
-			shortcut: #v asShortcut;
-			yourself
 ]
