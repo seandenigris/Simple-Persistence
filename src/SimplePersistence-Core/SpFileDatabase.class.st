@@ -179,6 +179,11 @@ SpFileDatabase class >> isPersistenceEnabled [
 	^ SessionManager default hasRegistered: self name
 ]
 
+{ #category : #restoring }
+SpFileDatabase class >> lastBackup [
+	^ self backupVersion: self lastBackupVersion.
+]
+
 { #category : #private }
 SpFileDatabase class >> lastBackupVersion [
 
