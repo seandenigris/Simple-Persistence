@@ -330,7 +330,7 @@ SpFileDatabase class >> versionOf: backupFile [
 
 { #category : #viewing }
 SpFileDatabase class >> viewBackupDirectory [
-	self backupDirectory open
+	self backupDirectory peOpen
 ]
 
 { #category : #'Magritte-actions' }
