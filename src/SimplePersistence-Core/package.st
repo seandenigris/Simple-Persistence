@@ -1,1 +1,1 @@
-Package { #name : #'SimplePersistence-Core' }
+Package { #name : 'SimplePersistence-Core' }

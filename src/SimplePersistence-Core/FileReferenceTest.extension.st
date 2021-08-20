@@ -1,6 +1,6 @@
-Extension { #name : #FileReferenceTest }
+Extension { #name : 'FileReferenceTest' }
 
-{ #category : #'*SimplePersistence-Core' }
+{ #category : '*SimplePersistence-Core' }
 FileReferenceTest >> testStoreOn [
 	| original recipe clone |
 	original := 'root/sub1/sub2' asFileReference.

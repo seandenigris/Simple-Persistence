@@ -1,6 +1,6 @@
-Extension { #name : #FileLocatorTest }
+Extension { #name : 'FileLocatorTest' }
 
-{ #category : #'*SimplePersistence-Core' }
+{ #category : '*SimplePersistence-Core' }
 FileLocatorTest >> testStoreOn [
 	| original recipe clone |
 	original := FileLocator home / 'subfolder'.

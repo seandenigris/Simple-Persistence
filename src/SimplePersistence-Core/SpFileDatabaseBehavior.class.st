@@ -1,15 +1,15 @@
 Class {
-	#name : #SpFileDatabaseBehavior,
-	#superclass : #Object,
+	#name : 'SpFileDatabaseBehavior',
+	#superclass : 'Object',
 	#instVars : [
 		'containerClass',
 		'instVarName',
 		'databaseClass'
 	],
-	#category : #'SimplePersistence-Core-Developer'
+	#category : 'SimplePersistence-Core-Developer'
 }
 
-{ #category : #'setting up' }
+{ #category : 'setting up' }
 SpFileDatabaseBehavior class >> createFor: aClass persisting: aSymbol [ 
 
 	| instance |
@@ -19,7 +19,7 @@ SpFileDatabaseBehavior class >> createFor: aClass persisting: aSymbol [
 	^ instance create.
 ]
 
-{ #category : #'setting up' }
+{ #category : 'setting up' }
 SpFileDatabaseBehavior >> addBackupDirectoryHook [
 
 	| source |
@@ -30,13 +30,13 @@ SpFileDatabaseBehavior >> addBackupDirectoryHook [
 	self databaseClass class compile: source classified: 'accessing'.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabaseBehavior >> containerClass: aClass [
 
 	containerClass := aClass.
 ]
 
-{ #category : #API }
+{ #category : 'API' }
 SpFileDatabaseBehavior >> create [
 
 	self 
@@ -44,7 +44,7 @@ SpFileDatabaseBehavior >> create [
 		updateSchema.
 ]
 
-{ #category : #'setting up' }
+{ #category : 'setting up' }
 SpFileDatabaseBehavior >> databaseClass [
 	
 	| topLevelCategory dbClassName |
@@ -60,19 +60,19 @@ SpFileDatabaseBehavior >> databaseClass [
 	^ databaseClass.
 ]
 
-{ #category : #'setting up' }
+{ #category : 'setting up' }
 SpFileDatabaseBehavior >> databaseClass: aClass [
 	
 	databaseClass := aClass
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabaseBehavior >> instVarName: aSymbol [
 
 	instVarName := aSymbol.
 ]
 
-{ #category : #'setting up' }
+{ #category : 'setting up' }
 SpFileDatabaseBehavior >> updateSchema [
 
 	| source classes sortedClasses |

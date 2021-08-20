@@ -6,18 +6,18 @@ See http://rmod.lille.inria.fr/web/pier/software/Fuel for more details.
 * Developed under the MIT license.
 "
 Class {
-	#name : #SpFuelSerializer,
-	#superclass : #SpSerializer,
-	#category : #'SimplePersistence-Core-Core'
+	#name : 'SpFuelSerializer',
+	#superclass : 'SpSerializer',
+	#category : 'SimplePersistence-Core-Core'
 }
 
-{ #category : #protocol }
+{ #category : 'protocol' }
 SpFuelSerializer >> materializeFrom: aFileReference [
 
 	^ FLMaterializer materializeFromFileNamed: aFileReference fullName.
 ]
 
-{ #category : #protocol }
+{ #category : 'protocol' }
 SpFuelSerializer >> serialize: anObject to: aFileReference [
 
 	FLSerializer serialize: anObject toFileNamed: aFileReference fullName.

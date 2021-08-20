@@ -1,23 +1,23 @@
 Class {
-	#name : #SpBackupBrowser,
-	#superclass : #GLMCompositePresentation,
-	#category : #'SimplePersistence-Core-Developer'
+	#name : 'SpBackupBrowser',
+	#superclass : 'GLMCompositePresentation',
+	#category : 'SimplePersistence-Core-Developer'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SpBackupBrowser class >> minimalPersistenceStatusReport [
 	<script>
 	(self subclasses collect: [ :e | e -> e isPersistenceEnabled ]) asDictionary inspect
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpBackupBrowser >> backup: root transformedBy: aBlock [
 	root ifNil: [ ^ root ].
 	aBlock ifNil: [ ^ root ].
 	^ [ aBlock value: root ] on: Error do: [ :e | e ]
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 SpBackupBrowser >> compose [
 	self title: 'Backup Browser'.
 	self tabulator
