@@ -1,6 +1,6 @@
-Extension { #name : 'FileReference' }
+Extension { #name : #FileReference }
 
-{ #category : '*SimplePersistence-Core' }
+{ #category : #'*SimplePersistence-Core' }
 FileReference >> storeOn: aStream [
 	aStream nextPut: $'.
 	filesystem printPath: path on: aStream.

@@ -1,6 +1,6 @@
-Extension { #name : 'FileLocator' }
+Extension { #name : #FileLocator }
 
-{ #category : '*SimplePersistence-Core' }
+{ #category : #'*SimplePersistence-Core' }
 FileLocator >> storeOn: aStream [
 	aStream
 		nextPutAll: self className;
