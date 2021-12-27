@@ -21,8 +21,8 @@ Class {
 	#name : #SpFileDatabase,
 	#superclass : #Object,
 	#classVars : [
-		'MainProjectName',
-		'RootDataFolder'
+		'RootDataFolder',
+		'SerializerClass'
 	],
 	#classInstVars : [
 		'lock',
@@ -273,14 +273,14 @@ SpFileDatabase class >> schema [
 SpFileDatabase class >> serializer [
 	"See SpSerializer class comment"
 
-	^ serializerClass
+	^ SerializerClass
 		ifNil: [ SpFuel4Strategy new ]
 		ifNotNil: [ :cls | cls new ].
 ]
 
 { #category : #accessing }
 SpFileDatabase class >> serializerClass: anSpFuelSerializerClass [
-	serializerClass := anSpFuelSerializerClass
+	SerializerClass := anSpFuelSerializerClass
 ]
 
 { #category : #private }
