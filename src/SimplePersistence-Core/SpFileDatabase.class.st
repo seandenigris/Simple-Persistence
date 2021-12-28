@@ -25,8 +25,7 @@ Class {
 		'SerializerClass'
 	],
 	#classInstVars : [
-		'lock',
-		'serializerClass'
+		'lock'
 	],
 	#category : #'SimplePersistence-Core-Core'
 }
@@ -274,7 +273,7 @@ SpFileDatabase class >> serializer [
 	"See SpSerializer class comment"
 
 	^ SerializerClass
-		ifNil: [ SpFuel4Strategy new ]
+		ifNil: [ SpFuel4dotOneStrategy new ]
 		ifNotNil: [ :cls | cls new ].
 ]
 
