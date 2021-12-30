@@ -295,7 +295,7 @@ SpFileDatabase class >> shutDown: isGoingDown [
 
 { #category : #accessing }
 SpFileDatabase class >> spData [
-	"All client classes (i.e. that use me for persistence) must respond to this message with the data to be persisted"
+	"All client classes (i.e. that use me for persistence) must respond to this message with the data to be persisted. Multiple DBs in the tree may include the same object without increasing the size on disk. Fuel is smart enough i.e. only saves each object once even if there are multiple references to it in the graph."
 	^ self schema
 		inject: Dictionary new
 		into: [ :dict :klass | dict at: klass put: klass spData; yourself ]
