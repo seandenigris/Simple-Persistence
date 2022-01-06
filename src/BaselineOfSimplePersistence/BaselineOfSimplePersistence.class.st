@@ -1,7 +1,32 @@
+"
+# Examples
+
+Here's an example of a class persisting a class-side instance variable for its subclasses:
+
+```
+MyAbstractClass class>>#restoreFrom: anObject
+	self = CwMacApplication
+		ifTrue: [ self subclassesDo: [ :cls | cls restoreFrom: (anObject at: cls) ] ]
+		ifFalse: [ installers := anObject ]
+```
+
+```
+MyAbstractClass class>>#spData
+	^ self = CwMacApplication
+		ifTrue: [ 
+			self subclasses 
+				inject: Dictionary new 
+				into: [ :dict :cls |
+					dict 
+						at: cls put: cls spData;
+						yourself ] ]
+		ifFalse: [ installers ]
+```
+"
 Class {
 	#name : #BaselineOfSimplePersistence,
 	#superclass : #BaselineOf,
-	#category : 'BaselineOfSimplePersistence'
+	#category : #BaselineOfSimplePersistence
 }
 
 { #category : #baselines }

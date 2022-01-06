@@ -3,13 +3,25 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'objects',
-		'byClass',
-		'includedClasses',
-		'classMap',
-		'groups'
+		'groups',
+		'canonInclusionTest',
+		'fieldConditions',
+		'groupConditions',
+		'idBlock',
+		'postMergeAction'
 	],
 	#category : #'SimplePersistence-Core-DeDuplication'
 }
+
+{ #category : #accessing }
+SpInstanceDeDuplicator class >> example [
+	<gtExample>
+	
+	^ self
+		given: [ SpInstanceDeDuplicator forObjects: { 1. 1.0. 2 } ]
+		when: [ :d | d canonInclusionTest: [ :e | #(2) includes: e ] ]
+		then: [ :d | ]
+]
 
 { #category : #accessing }
 SpInstanceDeDuplicator class >> forObjects: aCollection [ 
@@ -24,8 +36,15 @@ SpInstanceDeDuplicator >> autoMerge [
 ]
 
 { #category : #accessing }
-SpInstanceDeDuplicator >> byClass [
-	^ byClass ifNil: [ byClass := self objects groupedBy: [ :e | e class ] ]
+SpInstanceDeDuplicator >> canonInclusionTest [
+
+	^ canonInclusionTest
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> canonInclusionTest: anObject [
+
+	canonInclusionTest := anObject
 ]
 
 { #category : #accessing }
@@ -37,32 +56,50 @@ SpInstanceDeDuplicator >> childrenFor: anObject [
 ]
 
 { #category : #accessing }
-SpInstanceDeDuplicator >> childrenForClass: aClass [
-
-	| mapValue |
-	mapValue := self classMap
-		at: aClass
-		ifAbsentPut: [ 
-			| instances |
-			instances := self objects select: [ :e | e class = aClass ].
-			instances groupedBy: [ :e | e file ] ].
-	^ mapValue keys
+SpInstanceDeDuplicator >> copyForObjects: aCollection [
+	^ (self class forObjects: aCollection)
+		idBlock: self idBlock;
+		canonInclusionTest: self canonInclusionTest;
+		groupConditions: self groupConditions;
+		fieldConditions: self fieldConditions;
+		yourself
+		
 ]
 
 { #category : #accessing }
-SpInstanceDeDuplicator >> classMap [
-	^ classMap ifNil: [ classMap := Dictionary new ]
+SpInstanceDeDuplicator >> fieldConditions [
+
+	^ fieldConditions
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> fieldConditions: anObject [
+
+	fieldConditions := anObject
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> groupConditions [
+
+	^ groupConditions
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> groupConditions: anObject [
+
+	groupConditions := anObject
 ]
 
 { #category : #accessing }
 SpInstanceDeDuplicator >> groups [
 	| dict |
 	groups ifNotNil: [ ^ groups ].
-	dict := self objects groupedBy: [ :e | e file ].
+	dict := self objects groupedBy: self idBlock.
 	^ groups := OrderedCollection streamContents: [ :str |
 		dict keysAndValuesDo: [ :k :v |
 			| group |
 			group := SpSuspectedDuplicateGroup new
+				client: self;
 				id: k;
 				instances: v;
 				yourself.
@@ -88,17 +125,20 @@ SpInstanceDeDuplicator >> gtViewTreeOn: aView [
 ]
 
 { #category : #accessing }
-SpInstanceDeDuplicator >> includedClasses [
-	^ includedClasses ifNil: [ includedClasses := self objects collect: #class as: Set ]
+SpInstanceDeDuplicator >> idBlock [
+
+	^ idBlock
 ]
 
 { #category : #accessing }
-SpInstanceDeDuplicator >> mergable [
+SpInstanceDeDuplicator >> idBlock: anObject [
 
-	| objs |
-	objs := (self mergableGroups flatCollect: #instances) asIdentitySet.
-	^ self class forObjects: objs
-		
+	idBlock := anObject
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> includedClasses [
+	^ self objects collect: #class as: Set
 ]
 
 { #category : #accessing }
@@ -120,6 +160,18 @@ SpInstanceDeDuplicator >> objects: anObject [
 ]
 
 { #category : #accessing }
+SpInstanceDeDuplicator >> postMergeAction [
+
+	^ postMergeAction ifNil: [ postMergeAction := [ :grp | ] ]
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> postMergeAction: anObject [
+
+	postMergeAction := anObject
+]
+
+{ #category : #accessing }
 SpInstanceDeDuplicator >> printOn: aStream [
 
 	aStream
@@ -133,24 +185,36 @@ SpInstanceDeDuplicator >> reset [
 ]
 
 { #category : #accessing }
+SpInstanceDeDuplicator >> selectMergable [
+
+	^ self copyForObjects: (self mergableGroups flatCollect: #instances) asIdentitySet
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> selectUnmergable [
+
+	^ self copyForObjects: ((self groups reject: [ :e | e isMergable or: [ e isValid ] ]) flatCollect: #instances) asIdentitySet.
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> selectValid [
+
+	^ self copyForObjects: (self validGroups flatCollect: #instances) asIdentitySet.
+]
+
+{ #category : #accessing }
 SpInstanceDeDuplicator >> statusIconFor: anObject [
-	| canonInclusionTest |
-	
-	canonInclusionTest := [ :e | RlResourceLibrary uniqueInstance resources identityIncludes: e ].
 	
 	(anObject isKindOf: SpSuspectedDuplicateGroup) ifTrue: [ 
 		^ anObject statusIcon ].
 			
-	^ (canonInclusionTest value: anObject)
+	^ (self canonInclusionTest value: anObject)
 		ifTrue: [ BrGlamorousIcons greencircle ]
 		ifFalse: [ BrGlamorousIcons redcircle ].
 ]
 
 { #category : #accessing }
-SpInstanceDeDuplicator >> unmergable [
+SpInstanceDeDuplicator >> validGroups [
 
-	| objs |
-	objs := ((self groups reject: [ :e | e isMergable or: [ e isValid ] ]) flatCollect: #instances) asIdentitySet.
-	^ self class forObjects: objs
-		
+	^ self groups select: #isValid
 ]

@@ -5,14 +5,45 @@ Class {
 	#classTraits : 'MATPropertyOwner classTrait',
 	#instVars : [
 		'instances',
-		'id'
+		'id',
+		'client'
 	],
 	#category : #'SimplePersistence-Core-DeDuplication'
 }
 
 { #category : #accessing }
+SpSuspectedDuplicateGroup >> addMergabilityConditionsTo: aDescription [
+	
+	aDescription
+		addCondition: [ :col | col size > 1 ]
+			labelled: 'Must have multiple instances';
+		addCondition: [ :col | (col select: self canonInclusionTest) size = 1 ]
+			labelled: 'Must be exactly one canonical'.
+	
+	self fieldConditions do: [ :assoc |
+		aDescription
+			addCondition: [ :col | 
+				| seed |
+				seed := col atRandom perform: assoc key.
+				col allSatisfy: [ :e | assoc value cull: e cull: seed ] ]
+			labelled: assoc key ].
+	
+	self groupConditions do: [ :valuable |
+		aDescription
+			addCondition: [ :col | valuable cull: self instances cull: self ]
+				labelled: valuable printString ]
+]
+
+{ #category : #accessing }
+SpSuspectedDuplicateGroup >> addValidityConditionsTo: aDescription [
+	aDescription
+		addCondition: [ :col | col size = 1 ] labelled: 'Only one instance';
+		addCondition: [ :col | col allSatisfy: self canonInclusionTest ] labelled: 'Instance must be in canon'
+]
+
+{ #category : #accessing }
 SpSuspectedDuplicateGroup >> canonInclusionTest [
-	^ [ :e | RlResourceLibrary uniqueInstance resources identityIncludes: e ].
+	^ self client canonInclusionTest
 ]
 
 { #category : #accessing }
@@ -21,31 +52,73 @@ SpSuspectedDuplicateGroup >> canonical [
 ]
 
 { #category : #accessing }
+SpSuspectedDuplicateGroup >> client [
+
+	^ client
+]
+
+{ #category : #accessing }
+SpSuspectedDuplicateGroup >> client: anObject [
+
+	client := anObject
+]
+
+{ #category : #accessing }
 SpSuspectedDuplicateGroup >> fieldConditions [
 	
-	^ { 
-		#originalFile -> [ :e :seed | 
-		seed
-			ifNil: [ e originalFile isNil ]
-			ifNotNil: [ e originalFile resolve == seed resolve ] ].
-		#source -> [ :e :s | e source = s ].
-		#importTimestamp -> [ :e :s | e importTimestamp = s ].
-		#metadata -> [ :e :s | e metadata = s ].
-		#yourself -> [ :r | r properties keys hasEqualElements: #(#llWork) ]
-	}
+	^ self client fieldConditions
 ]
 
 { #category : #accessing }
 SpSuspectedDuplicateGroup >> groupConditions [
 	
-	^ { 
-		[ :insts | insts anySatisfy: [ :r | 
-			LlLibrary uniqueInstance works 
-				detect: [ :w | w == (r propertyAt: #llWork) ]
-				ifFound: [ :w | 
-					self propertyAt: #llWork put: w.
-					true ]
-				ifNone: [ false ] ] ] }
+	^ self client groupConditions
+]
+
+{ #category : #accessing }
+SpSuspectedDuplicateGroup >> gtViewInstancesOn: aView [
+
+	<gtView>
+	^ aView columnedList
+		title: 'Instances' translated;
+		priority: 65;
+		items: [ self instances asOrderedCollection ];
+		column: 'Status' 
+			icon: [ :e | self client statusIconFor: e ]
+			width: 75;
+		column: 'Name' text: [ :p | p asString asRopedText ];
+		"column: 'Actions' 
+			icon: [ :p | p actionButtons first ]
+			width: 500;"
+		actionUpdateButtonTooltip: 'Update'
+]
+
+{ #category : #accessing }
+SpSuspectedDuplicateGroup >> gtViewMergeVerificationOn: aView [
+	<gtView>
+	^ aView list
+		title: 'Merge Verification' translated;
+		priority: 50;
+		items: [ 
+OrderedCollection streamContents: [ :str |
+[ 
+	| desc |
+	desc := MAToManyRelationDescription new.
+	self addMergabilityConditionsTo: desc.
+	desc validateConditions: self instances ]
+	on: MAValidationError
+	do: [ :ex | str << ex. ex resume ] ].
+ ]
+]
+
+{ #category : #accessing }
+SpSuspectedDuplicateGroup >> gtViewPatchOn: aView [
+	<gtView>
+	self patch operations ifEmpty: [ ^ aView empty ].
+	^ aView explicit
+		title: 'Patch' translated;
+		priority: 51;
+		stencil: [ self patch asElement ]
 ]
 
 { #category : #accessing }
@@ -75,27 +148,24 @@ SpSuspectedDuplicateGroup >> instances: anObject [
 { #category : #accessing }
 SpSuspectedDuplicateGroup >> isMergable [
 	
-	| didFieldConditionsPass didGroupConditionsPass |
-	self instances size > 1 ifFalse: [ ^ false ].
-	(self instances select: self canonInclusionTest) size = 1 ifFalse: [ ^ false ].
-	
-	didFieldConditionsPass := self fieldConditions allSatisfy: [ :assoc |
-		| seed |
-		seed := self instances atRandom perform: assoc key.
-		self instances allSatisfy: [ :e | assoc value cull: e cull: seed ] ].
-	didFieldConditionsPass ifFalse: [ ^ false ].
-	
-	didGroupConditionsPass := self groupConditions allSatisfy: [ :valuable |
-		valuable value: self instances ].
-	didGroupConditionsPass ifFalse: [ ^ false ].
-	
+	| desc |
+	desc := MAToManyRelationDescription new.
+	self addMergabilityConditionsTo: desc.
+	[ desc validateConditions: self instances ]
+		on: MAValidationError
+		do: [ :ex | ^ false ].
 	^ true
 ]
 
 { #category : #accessing }
 SpSuspectedDuplicateGroup >> isValid [
-	^ self instances size = 1 and: [ 
-		self instances allSatisfy: self canonInclusionTest ]
+	| desc |
+	desc := MAToManyRelationDescription new.
+	self addValidityConditionsTo: desc.
+	[ desc validateConditions: self instances ]
+		on: MAValidationError
+		do: [ :ex | ^ false ].
+	^ true
 ]
 
 { #category : #accessing }
@@ -109,8 +179,16 @@ SpSuspectedDuplicateGroup >> merge [
 ]
 
 { #category : #accessing }
+SpSuspectedDuplicateGroup >> patch [
+	"Probably only makes sense if two instances"
+	| col |
+	col := self instances asOrderedCollection.
+	^ col first patchRelativeToBase: col second
+]
+
+{ #category : #accessing }
 SpSuspectedDuplicateGroup >> postMergeAction [
-	^ [ self canonical properties at: #llWork put: (self properties at: #llWork) ]
+	^ self client postMergeAction
 ]
 
 { #category : #accessing }
