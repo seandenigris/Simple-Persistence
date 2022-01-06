@@ -19,6 +19,11 @@ SpInstanceDeDuplicator class >> forObjects: aCollection [
 ]
 
 { #category : #accessing }
+SpInstanceDeDuplicator >> autoMerge [
+	self mergableGroups do: #merge
+]
+
+{ #category : #accessing }
 SpInstanceDeDuplicator >> byClass [
 	^ byClass ifNil: [ byClass := self objects groupedBy: [ :e | e class ] ]
 ]
@@ -26,11 +31,8 @@ SpInstanceDeDuplicator >> byClass [
 { #category : #accessing }
 SpInstanceDeDuplicator >> childrenFor: anObject [
 
-	anObject isClass ifTrue: [ ^ self childrenForClass:anObject ].
-	(anObject isKindOf: AbstractFileReference) ifTrue: [ 
-		| filesToResources |
-		filesToResources := self classMap values detect: [ :e | e includesKey: anObject ].
-		^ filesToResources at: anObject ].
+	(anObject isKindOf: SpSuspectedDuplicateGroup) ifTrue: [ 
+		^ anObject instances ].
 	^ #()
 ]
 
@@ -73,7 +75,7 @@ SpInstanceDeDuplicator >> gtViewTreeOn: aView [
 	^ aView columnedTree
 		title: 'Objects' translated;
 		priority: 80;
-		items: [ self includedClasses ];
+		items: [ self groups ];
 		children: [ :e | self childrenFor: e ]; 
 		column: 'Status' 
 			icon: [ :e | self statusIconFor: e ]
@@ -91,6 +93,21 @@ SpInstanceDeDuplicator >> includedClasses [
 ]
 
 { #category : #accessing }
+SpInstanceDeDuplicator >> mergable [
+
+	| objs |
+	objs := (self mergableGroups flatCollect: #instances) asIdentitySet.
+	^ self class forObjects: objs
+		
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> mergableGroups [
+
+	^ self groups select: #isMergable
+]
+
+{ #category : #accessing }
 SpInstanceDeDuplicator >> objects [
 
 	^ objects
@@ -103,22 +120,37 @@ SpInstanceDeDuplicator >> objects: anObject [
 ]
 
 { #category : #accessing }
+SpInstanceDeDuplicator >> printOn: aStream [
+
+	aStream
+		print: self groups size;
+		nextPutAll: ' groups'
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> reset [
+	groups := nil
+]
+
+{ #category : #accessing }
 SpInstanceDeDuplicator >> statusIconFor: anObject [
 	| canonInclusionTest |
 	
 	canonInclusionTest := [ :e | RlResourceLibrary uniqueInstance resources identityIncludes: e ].
 	
-	(anObject isKindOf: Class) ifTrue: [ 
-		^ BrGlamorousIcons graycircle ].
-			
-	(anObject isKindOf: AbstractFileReference) ifTrue: [ 
-		| matchingChildren |
-		matchingChildren := self childrenFor: anObject.
-		^ (matchingChildren size = 1 and: [ matchingChildren allSatisfy: canonInclusionTest ])
-			ifTrue: [ BrGlamorousIcons greencircle ]
-			ifFalse: [ BrGlamorousIcons redcircle ] ].
+	(anObject isKindOf: SpSuspectedDuplicateGroup) ifTrue: [ 
+		^ anObject statusIcon ].
 			
 	^ (canonInclusionTest value: anObject)
 		ifTrue: [ BrGlamorousIcons greencircle ]
 		ifFalse: [ BrGlamorousIcons redcircle ].
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> unmergable [
+
+	| objs |
+	objs := ((self groups reject: [ :e | e isMergable or: [ e isValid ] ]) flatCollect: #instances) asIdentitySet.
+	^ self class forObjects: objs
+		
 ]
