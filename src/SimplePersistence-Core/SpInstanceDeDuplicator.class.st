@@ -1,3 +1,16 @@
+"
+I help visualize models where the object references have been broken, causing model fragmentation and duplicate instances. This can happen due to incorrect serialization/materialization.
+
+For example, if your model graph root was `{ A. B }`, where:
+	A -> B
+	C -> B
+You might end up with:
+	A -> B
+	C -> B'
+There are now two different copies of B.
+
+I will show you which instances are probably duplicates and which are okay. Check out this example: {{gtExample:SpInstanceDeDuplicator class>>#example}}
+"
 Class {
 	#name : #SpInstanceDeDuplicator,
 	#superclass : #Object,
@@ -13,14 +26,28 @@ Class {
 	#category : #'SimplePersistence-Core-DeDuplication'
 }
 
-{ #category : #accessing }
+{ #category : #examples }
 SpInstanceDeDuplicator class >> example [
 	<gtExample>
 	
+	| canon objs |
 	^ self
-		given: [ SpInstanceDeDuplicator forObjects: { 1. 1.0. 2 } ]
-		when: [ :d | d canonInclusionTest: [ :e | #(2) includes: e ] ]
-		then: [ :d | ]
+		given: [ 
+			canon := { 1@1. 2@2 }.
+			objs := OrderedCollection new
+				addAll: canon;
+				add: canon atRandom copy;
+				add: 3@3;
+				yourself ]
+		when: [ 
+			(SpInstanceDeDuplicator forObjects: objs)
+				canonInclusionTest: [ :e | canon identityIncludes: e ];
+				idBlock: [ :e | e printString ];
+				yourself ]
+		then: [ :d |
+			d selectMergable groups should haveSize: 1.
+			d selectValid groups should haveSize: canon size - 1.
+			d selectUnmergable groups should haveSize: 1 ]
 ]
 
 { #category : #accessing }
@@ -78,7 +105,10 @@ SpInstanceDeDuplicator >> copySelect: aBlock [
 { #category : #accessing }
 SpInstanceDeDuplicator >> fieldConditions [
 
-	^ fieldConditions
+	^ fieldConditions ifNil: [ 
+		{ 
+			#yourself -> [ :r | true ] 
+		} ].
 ]
 
 { #category : #accessing }
@@ -90,7 +120,15 @@ SpInstanceDeDuplicator >> fieldConditions: anObject [
 { #category : #accessing }
 SpInstanceDeDuplicator >> groupConditions [
 
-	^ groupConditions
+	^ groupConditions ifNil: [ 
+		{ 
+			[ :insts :grp | 
+				| oCol |
+				oCol := grp instances asOrderedCollection.
+				oCol size > 1 
+					ifTrue: [ (oCol first patchRelativeToBase: oCol second) operations isEmpty ]
+					ifFalse: [ true ] ]
+		} ]
 ]
 
 { #category : #accessing }
