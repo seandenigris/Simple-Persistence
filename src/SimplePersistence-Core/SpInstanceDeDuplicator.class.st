@@ -32,7 +32,7 @@ SpInstanceDeDuplicator class >> forObjects: aCollection [
 
 { #category : #accessing }
 SpInstanceDeDuplicator >> autoMerge [
-	self mergableGroups do: #merge
+	self selectMergable groups do: #merge
 ]
 
 { #category : #accessing }
@@ -64,6 +64,15 @@ SpInstanceDeDuplicator >> copyForObjects: aCollection [
 		fieldConditions: self fieldConditions;
 		yourself
 		
+]
+
+{ #category : #accessing }
+SpInstanceDeDuplicator >> copySelect: aBlock [
+
+	| selectedGroups objs |
+	selectedGroups := self groups select: aBlock.
+	objs := (selectedGroups flatCollect: #instances) asIdentitySet.
+	^ self copyForObjects: objs
 ]
 
 { #category : #accessing }
@@ -142,12 +151,6 @@ SpInstanceDeDuplicator >> includedClasses [
 ]
 
 { #category : #accessing }
-SpInstanceDeDuplicator >> mergableGroups [
-
-	^ self groups select: #isMergable
-]
-
-{ #category : #accessing }
 SpInstanceDeDuplicator >> objects [
 
 	^ objects
@@ -187,19 +190,19 @@ SpInstanceDeDuplicator >> reset [
 { #category : #accessing }
 SpInstanceDeDuplicator >> selectMergable [
 
-	^ self copyForObjects: (self mergableGroups flatCollect: #instances) asIdentitySet
+	^ self copySelect: #isMergable
 ]
 
 { #category : #accessing }
 SpInstanceDeDuplicator >> selectUnmergable [
 
-	^ self copyForObjects: ((self groups reject: [ :e | e isMergable or: [ e isValid ] ]) flatCollect: #instances) asIdentitySet.
+	^ self copySelect: [ :e | e isMergable not and: [ e isValid not ] ]
 ]
 
 { #category : #accessing }
 SpInstanceDeDuplicator >> selectValid [
 
-	^ self copyForObjects: (self validGroups flatCollect: #instances) asIdentitySet.
+	^ self copySelect: #isValid
 ]
 
 { #category : #accessing }
@@ -211,10 +214,4 @@ SpInstanceDeDuplicator >> statusIconFor: anObject [
 	^ (self canonInclusionTest value: anObject)
 		ifTrue: [ BrGlamorousIcons greencircle ]
 		ifFalse: [ BrGlamorousIcons redcircle ].
-]
-
-{ #category : #accessing }
-SpInstanceDeDuplicator >> validGroups [
-
-	^ self groups select: #isValid
 ]

@@ -28,6 +28,8 @@ SpSuspectedDuplicateGroup >> addMergabilityConditionsTo: aDescription [
 				col allSatisfy: [ :e | assoc value cull: e cull: seed ] ]
 			labelled: assoc key ].
 	
+	"self instances size < 2 ifTrue: [ ^ self ]."
+	
 	self groupConditions do: [ :valuable |
 		aDescription
 			addCondition: [ :col | valuable cull: self instances cull: self ]
@@ -114,7 +116,10 @@ OrderedCollection streamContents: [ :str |
 { #category : #accessing }
 SpSuspectedDuplicateGroup >> gtViewPatchOn: aView [
 	<gtView>
-	self patch operations ifEmpty: [ ^ aView empty ].
+	self patch 
+		ifNotNil: [ :p |
+			p operations ifEmpty: [ ^ aView empty ] ]
+		ifNil: [ ^ aView empty ].
 	^ aView explicit
 		title: 'Patch' translated;
 		priority: 51;
@@ -183,6 +188,7 @@ SpSuspectedDuplicateGroup >> patch [
 	"Probably only makes sense if two instances"
 	| col |
 	col := self instances asOrderedCollection.
+	col size < 2 ifTrue: [ ^ nil ].
 	^ col first patchRelativeToBase: col second
 ]
 
