@@ -171,7 +171,7 @@ SpSuspectedDuplicateGroup >> isValid [
 { #category : #accessing }
 SpSuspectedDuplicateGroup >> merge [
 	| duplicates canonical |
-	self isMergable ifFalse: [ ^ self error: 'group not mergable!' ].
+	self isMergable ifFalse: [ Warning signal: 'group not mergable!' ].
 	canonical := self canonical.
 	duplicates := self instances copyWithout: canonical.
 	duplicates do: [ :e | e becomeForward: canonical ].
@@ -198,7 +198,8 @@ SpSuspectedDuplicateGroup >> printOn: aStream [
 		nextPut: $(;
 		print: self instances size;
 		nextPutAll: ' objects ';
-		print: self id
+		print: self id;
+		nextPut: $)
 ]
 
 { #category : #accessing }
