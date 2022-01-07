@@ -66,6 +66,19 @@ SpSuspectedDuplicateGroup >> client: anObject [
 ]
 
 { #category : #accessing }
+SpSuspectedDuplicateGroup >> failedMergeConditions [
+	
+	^ OrderedCollection streamContents: [ :str |
+		[ 
+			| desc |
+			desc := MAToManyRelationDescription new.
+			self addMergabilityConditionsTo: desc.
+			desc validateConditions: self instances ]
+				on: MAValidationError
+				do: [ :ex | str << ex. ex resume ] ].
+]
+
+{ #category : #accessing }
 SpSuspectedDuplicateGroup >> fieldConditions [
 	
 	^ self client fieldConditions
@@ -98,19 +111,12 @@ SpSuspectedDuplicateGroup >> gtViewInstancesOn: aView [
 { #category : #accessing }
 SpSuspectedDuplicateGroup >> gtViewMergeVerificationOn: aView [
 	<gtView>
+	| items |
+	items := self failedMergeConditions ifEmpty: [ ^ aView empty ].
 	^ aView list
 		title: 'Merge Verification' translated;
 		priority: 50;
-		items: [ 
-OrderedCollection streamContents: [ :str |
-[ 
-	| desc |
-	desc := MAToManyRelationDescription new.
-	self addMergabilityConditionsTo: desc.
-	desc validateConditions: self instances ]
-	on: MAValidationError
-	do: [ :ex | str << ex. ex resume ] ].
- ]
+		items: [ items ]
 ]
 
 { #category : #accessing }
@@ -153,13 +159,7 @@ SpSuspectedDuplicateGroup >> instances: anObject [
 { #category : #accessing }
 SpSuspectedDuplicateGroup >> isMergable [
 	
-	| desc |
-	desc := MAToManyRelationDescription new.
-	self addMergabilityConditionsTo: desc.
-	[ desc validateConditions: self instances ]
-		on: MAValidationError
-		do: [ :ex | ^ false ].
-	^ true
+	^ self failedMergeConditions isEmpty
 ]
 
 { #category : #accessing }
