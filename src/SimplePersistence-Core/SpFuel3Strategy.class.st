@@ -11,6 +11,13 @@ Class {
 	#category : #'SimplePersistence-Core-Core'
 }
 
+{ #category : #testing }
+SpFuel3Strategy class >> isActive [
+	
+	(FLSerializer respondsTo: #currentVersion) ifFalse: [ ^ false ].
+	^ FLSerializer currentVersion asString first = $3
+]
+
 { #category : #protocol }
 SpFuel3Strategy >> materializeFrom: aFileReference [
 

@@ -7,6 +7,11 @@ Class {
 	#category : #'SimplePersistence-Core-Core'
 }
 
+{ #category : #accessing }
+SpStrategy class >> default [
+	^ self subclasses detect: #isActive ifFound: [ :cls | cls new ] ifNone: [ nil ]
+]
+
 { #category : #protocol }
 SpStrategy >> materializeFrom: aFileReference [
 

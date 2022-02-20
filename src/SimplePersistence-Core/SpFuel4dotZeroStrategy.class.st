@@ -4,6 +4,14 @@ Class {
 	#category : #'SimplePersistence-Core-Core'
 }
 
+{ #category : #testing }
+SpFuel4dotZeroStrategy class >> isActive [
+	| currentFuel versionClass |
+	versionClass := Smalltalk globals at: #FLVersion ifAbsent: [ ^ false ].
+	currentFuel := versionClass current.
+	^ currentFuel major = 4 and: [ currentFuel minor = 0 ]
+]
+
 { #category : #protocol }
 SpFuel4dotZeroStrategy >> materializeFrom: aFileReference [
 

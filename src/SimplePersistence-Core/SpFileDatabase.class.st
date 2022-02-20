@@ -273,7 +273,7 @@ SpFileDatabase class >> serializer [
 	"See SpSerializer class comment"
 
 	^ SerializerClass
-		ifNil: [ SpFuel4dotOneStrategy new ]
+		ifNil: [ SpStrategy default ]
 		ifNotNil: [ :cls | cls new ].
 ]
 
