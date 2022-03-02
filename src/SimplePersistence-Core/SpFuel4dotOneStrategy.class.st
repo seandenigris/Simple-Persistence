@@ -7,9 +7,10 @@ Class {
 { #category : #testing }
 SpFuel4dotOneStrategy class >> isActive [
 	| currentFuel versionClass |
+	
 	versionClass := Smalltalk globals at: #FLVersion ifAbsent: [ ^ false ].
 	currentFuel := versionClass current.
-	^ currentFuel major = 4 and: [ currentFuel minor = 1 ]
+	^ currentFuel major > 4 or: [ currentFuel major = 4 and: [ currentFuel minor >= 1 ] ]
 ]
 
 { #category : #protocol }
