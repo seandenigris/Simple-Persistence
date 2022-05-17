@@ -1,6 +1,6 @@
 Class {
 	#name : #SpFuel4dotOneStrategy,
-	#superclass : #SpStrategy,
+	#superclass : #SpFuel4Strategy,
 	#category : #'SimplePersistence-Core-Core'
 }
 
@@ -22,6 +22,13 @@ SpFuel4dotOneStrategy >> materializeFrom: aFileReference [
 		materialize.
 		
 	^ materialization root
+]
+
+{ #category : #accessing }
+SpFuel4dotOneStrategy >> new: anFlClass withFile: aFileReference [
+	^ anFlClass new
+		filePath: aFileReference fullName;
+		yourself.
 ]
 
 { #category : #protocol }

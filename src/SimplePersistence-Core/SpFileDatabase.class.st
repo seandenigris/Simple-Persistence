@@ -206,6 +206,11 @@ SpFileDatabase class >> menuCommandOn: aBuilder [
 				icon: Smalltalk ui icons glamourousTable. ]
 ]
 
+{ #category : #accessing }
+SpFileDatabase class >> metadata [
+	^ #()
+]
+
 { #category : #'*SimplePersistence-Core-Developer' }
 SpFileDatabase class >> persist: aSymbol in: aClass [ 
 	"See Object>>#persistIn:as:"
@@ -255,7 +260,7 @@ SpFileDatabase class >> saveRepository [
 	lock critical: [
 		self trimBackups.
 		version := self lastBackupVersion + 1.
-		self serializer serialize: self spData to: self backupDirectory / self name, version asString ].
+		self serializer serializeDB: self to: self backupDirectory / self name, version asString ].
 ]
 
 { #category : #accessing }

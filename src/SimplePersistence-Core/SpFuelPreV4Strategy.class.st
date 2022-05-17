@@ -24,7 +24,7 @@ SpFuelPreV4Strategy >> materializeFrom: aFileReference [
 ]
 
 { #category : #protocol }
-SpFuelPreV4Strategy >> serialize: anObject to: aFileReference [
+SpFuelPreV4Strategy >> serialize: anObject withMetadata: aDictionary to: aFileReference [
 
 	FLSerializer serialize: anObject toFileNamed: aFileReference fullName.
 ]

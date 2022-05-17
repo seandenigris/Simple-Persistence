@@ -1,6 +1,6 @@
 Class {
 	#name : #SpFuel4dotZeroStrategy,
-	#superclass : #SpStrategy,
+	#superclass : #SpFuel4Strategy,
 	#category : #'SimplePersistence-Core-Core'
 }
 
@@ -24,10 +24,8 @@ SpFuel4dotZeroStrategy >> materializeFrom: aFileReference [
 ]
 
 { #category : #protocol }
-SpFuel4dotZeroStrategy >> serialize: anObject to: aFileReference [
-
-	FLSerializer new
-		object: anObject;
+SpFuel4dotZeroStrategy >> new: anFlClass withFile: aFileReference [
+	^ anFlClass new
 		fileName: aFileReference fullName;
-		serialize.
+		yourself.
 ]

@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 SpStrategy class >> default [
-	^ self subclasses detect: #isActive ifFound: [ :cls | cls new ] ifNone: [ nil ]
+	^ self allSubclasses detect: #isActive ifFound: [ :cls | cls new ] ifNone: [ nil ]
 ]
 
 { #category : #protocol }
@@ -18,8 +18,21 @@ SpStrategy >> materializeFrom: aFileReference [
 	self subclassResponsibility.
 ]
 
-{ #category : #protocol }
+{ #category : #convenience }
 SpStrategy >> serialize: anObject to: aFileReference [
+	"Not used by this project, but could be useful for users to serialize arbitrary data"
 
-	self subclassResponsibility.
+	self serialize: anObject withMetadata: #() to: aFileReference
+]
+
+{ #category : #private }
+SpStrategy >> serialize: anObject withMetadata: aDictionary to: aFileReference [
+
+	self subclassResponsibility
+]
+
+{ #category : #protocol }
+SpStrategy >> serializeDB: anSpFileDatabase to: aFileReference [
+
+	self serialize: anSpFileDatabase spData withMetadata: anSpFileDatabase metadata to: aFileReference
 ]
