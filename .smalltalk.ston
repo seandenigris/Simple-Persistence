@@ -1,0 +1,9 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'SimplePersistence',
+      #directory : 'src',
+      #platforms : [ #pharo ]
+    }
+  ]
+}
