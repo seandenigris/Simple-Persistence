@@ -1,7 +1,7 @@
 Class {
 	#name : #SpBackupBrowser,
-	#superclass : #GLMCompositePresentation,
-	#category : 'SimplePersistence-Core-Developer'
+	#superclass : #SpPresenter,
+	#category : #'SimplePersistence-Core-Developer'
 }
 
 { #category : #'as yet unclassified' }

@@ -1,6 +1,6 @@
 Class {
 	#name : #SpPersistenceAnalyzer,
-	#superclass : #ComposableModel,
+	#superclass : #SpPresenter,
 	#instVars : [
 		'okButton',
 		'colorLabel',
@@ -13,7 +13,7 @@ Class {
 		'listModel',
 		'classDefinition'
 	],
-	#category : 'SimplePersistence-Core-Developer'
+	#category : #'SimplePersistence-Core-Developer'
 }
 
 { #category : #'as yet unclassified' }
