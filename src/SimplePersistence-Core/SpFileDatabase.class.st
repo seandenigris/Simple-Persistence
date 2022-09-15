@@ -90,18 +90,6 @@ SpFileDatabase class >> defaultHistoryCount [
 	^ 50
 ]
 
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> descriptionSaveRepository [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #saveRepository;
-			label: 'Save Repository';
-			isMutator: true;
-			shortcut: $s asShortcut;
-			yourself.
-]
-
 { #category : #private }
 SpFileDatabase class >> disablePersistence [
 	SessionManager default unregisterClassNamed: self name
@@ -239,6 +227,30 @@ SpFileDatabase class >> saveRepository [
 		self trimBackups.
 		version := self lastBackupVersion + 1.
 		self serializer serializeDB: self to: self backupDirectory / self name, version asString ].
+]
+
+{ #category : #saving }
+SpFileDatabase class >> saveRepositoryAndNotify [
+
+	| beforeStamp file didSucceed |
+	beforeStamp := DateAndTime now.
+	self saveRepository.
+	file := self backupFileForVersion: self lastBackupVersion.
+	didSucceed := file size > 0 and: [ file creationTime > beforeStamp ].
+	didSucceed ifFalse: [ self error: self name, ' failed to save' ].
+	UIManager default inform: self name, ' saved'
+]
+
+{ #category : #'Magritte-actions' }
+SpFileDatabase class >> saveRepositoryDescription [
+	<magritteActionDescription>
+	
+	^ MAActionDescription new
+			action: #saveRepositoryAndNotify;
+			label: 'Save Repository';
+			isMutator: true;
+			shortcut: $s asShortcut;
+			yourself.
 ]
 
 { #category : #accessing }
