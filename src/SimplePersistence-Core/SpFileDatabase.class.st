@@ -91,29 +91,6 @@ SpFileDatabase class >> defaultHistoryCount [
 ]
 
 { #category : #'Magritte-actions' }
-SpFileDatabase class >> descriptionDisablePersistence [
-	"Disable while playing with #togglePersistence, which may replace me.
-	<magritteActionDescription>"
-	
-	^ MAActionDescription new
-			action: #disablePersistence;
-			enableBlock: [ :e | e isPersistenceEnabled ];
-			yourself
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> descriptionRestoreLastBackup [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #restoreLastBackup;
-			label: 'Restore Last Backup';
-			isMutator: false;
-			shortcut: $r asShortcut;
-			yourself
-]
-
-{ #category : #'Magritte-actions' }
 SpFileDatabase class >> descriptionSaveRepository [
 	<magritteActionDescription>
 	
@@ -125,31 +102,20 @@ SpFileDatabase class >> descriptionSaveRepository [
 			yourself.
 ]
 
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> descriptionTogglePersistence [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #togglePersistence;
-			label: 'Toggle Persistence';
-			isMutator: true;
-			shortcut: $t asShortcut;
-			yourself
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> descriptionViewBackupDirectory [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #viewBackupDirectory;
-			shortcut: $v asShortcut;
-			yourself.
-]
-
 { #category : #private }
 SpFileDatabase class >> disablePersistence [
 	SessionManager default unregisterClassNamed: self name
+]
+
+{ #category : #'Magritte-actions' }
+SpFileDatabase class >> disablePersistenceDescription [
+	"Disable while playing with #togglePersistence, which may replace me.
+	<magritteActionDescription>"
+	
+	^ MAActionDescription new
+			action: #disablePersistence;
+			enableBlock: [ :e | e isPersistenceEnabled ];
+			yourself
 ]
 
 { #category : #private }
@@ -242,6 +208,18 @@ SpFileDatabase class >> restoreLastBackup [
 	self restoreBackupVersion: self lastBackupVersion.
 ]
 
+{ #category : #'Magritte-actions' }
+SpFileDatabase class >> restoreLastBackupDescription [
+	<magritteActionDescription>
+	
+	^ MAActionDescription new
+			action: #restoreLastBackup;
+			label: 'Restore Last Backup';
+			isMutator: false;
+			shortcut: $r asShortcut;
+			yourself
+]
+
 { #category : #accessing }
 SpFileDatabase class >> rootDataFolder [
 	^ RootDataFolder ifNil: [ FileLocator imageDirectory ]
@@ -325,6 +303,18 @@ SpFileDatabase class >> togglePersistence [
 		ifFalse: [ self enablePersistence ]
 ]
 
+{ #category : #'Magritte-actions' }
+SpFileDatabase class >> togglePersistenceDescription [
+	<magritteActionDescription>
+	
+	^ MAActionDescription new
+			action: #togglePersistence;
+			label: 'Toggle Persistence';
+			isMutator: true;
+			shortcut: $t asShortcut;
+			yourself
+]
+
 { #category : #private }
 SpFileDatabase class >> trimBackups [
 	| entries versionsToKeep |
@@ -343,6 +333,16 @@ SpFileDatabase class >> versionOf: backupFile [
 { #category : #viewing }
 SpFileDatabase class >> viewBackupDirectory [
 	self backupDirectory peOpen
+]
+
+{ #category : #'Magritte-actions' }
+SpFileDatabase class >> viewBackupDirectoryDescription [
+	<magritteActionDescription>
+	
+	^ MAActionDescription new
+			action: #viewBackupDirectory;
+			shortcut: $v asShortcut;
+			yourself.
 ]
 
 { #category : #'Magritte-actions' }
