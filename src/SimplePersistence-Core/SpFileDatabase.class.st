@@ -238,7 +238,7 @@ SpFileDatabase class >> saveRepositoryAndNotify [
 	file := self backupFileForVersion: self lastBackupVersion.
 	didSucceed := file size > 0 and: [ file creationTime > beforeStamp ].
 	didSucceed ifFalse: [ self error: self name, ' failed to save' ].
-	UIManager default inform: self name, ' saved'
+	UIManager default inform: self name, ' saved on ', beforeStamp printUS
 ]
 
 { #category : #'Magritte-actions' }
