@@ -85,6 +85,17 @@ SpFileDatabase class >> backupVersion: aNumber [
 ]
 
 { #category : #accessing }
+SpFileDatabase class >> deepRoots [
+	"My root data objects, and those of other DBs I contain, recursively all the way through the tree"
+	
+	^ OrderedCollection streamContents: [ :result |
+		self schema do: [ :cls |
+			(cls inheritsFrom: SpFileDatabase)
+				ifTrue: [ result nextPutAll: cls roots ]
+				ifFalse: [ result << cls spData ] ] ]
+]
+
+{ #category : #accessing }
 SpFileDatabase class >> defaultHistoryCount [
 	"How many backups to keep."
 	^ 50
