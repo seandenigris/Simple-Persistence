@@ -242,15 +242,14 @@ SpFileDatabase class >> saveRepository [
 
 { #category : #saving }
 SpFileDatabase class >> saveRepositoryAndNotify [
-
 	| beforeStamp file didSucceed |
 	"Truncate because creation time below may have second precision"
 	beforeStamp := DateAndTime now truncated.
 	self saveRepository.
 	file := self backupFileForVersion: self lastBackupVersion.
-	didSucceed := file size > 0 and: [ file creationTime > beforeStamp ].
-	didSucceed ifFalse: [ self error: self name, ' failed to save' ].
-	UIManager default inform: self name, ' saved on ', beforeStamp printUS
+	didSucceed := file size > 0 and: [ file creationTime >= beforeStamp ].
+	didSucceed ifFalse: [ self error: self name , ' failed to save' ].
+	UIManager default inform: self name , ' saved on ' , beforeStamp printUS
 ]
 
 { #category : #'Magritte-actions' }
