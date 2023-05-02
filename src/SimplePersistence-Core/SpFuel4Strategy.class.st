@@ -16,7 +16,10 @@ SpFuel4Strategy >> materializeFrom: aFileReference [
 	| materialization |
 	materialization := (self new: FLMaterializer withFile: aFileReference) materialize.
 		
-	^ materialization root
+	^ SpBackup new
+		header: materialization header additionalObjects;
+		spData: materialization root;
+		yourself
 ]
 
 { #category : #accessing }
@@ -25,15 +28,15 @@ SpFuel4Strategy >> new: anFlClass withFile: aFileReference [
 ]
 
 { #category : #protocol }
-SpFuel4Strategy >> serialize: anObject withMetadata: aDictionary to: aFileReference [
+SpFuel4Strategy >> serialize: anSpBackup to: aFileReference [
 
 	| serializer |
 	serializer := self new: FLSerializer withFile: aFileReference.
 		
-	aDictionary keysAndValuesDo: [  :k :v |
+	anSpBackup header keysAndValuesDo: [ :k :v |
 		serializer at: k putAdditionalObject: v ].
-	
+		
 	serializer 
-		object: anObject;
-		serialize.
+		object: anSpBackup spData;
+		serialize
 ]

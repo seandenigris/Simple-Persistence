@@ -13,17 +13,6 @@ SpFuel4dotZeroStrategy class >> isActive [
 ]
 
 { #category : #protocol }
-SpFuel4dotZeroStrategy >> materializeFrom: aFileReference [
-
-	| materialization |
-	materialization := FLMaterializer new
-		fileName: aFileReference fullName;
-		materialize.
-		
-	^ materialization root
-]
-
-{ #category : #protocol }
 SpFuel4dotZeroStrategy >> new: anFlClass withFile: aFileReference [
 	^ anFlClass new
 		fileName: aFileReference fullName;

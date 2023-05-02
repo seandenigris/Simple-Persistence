@@ -176,6 +176,12 @@ SpFileDatabase class >> metadata [
 	^ #()
 ]
 
+{ #category : #accessing }
+SpFileDatabase class >> newBackup [
+
+	^ SpBackup newForDatabase: self
+]
+
 { #category : #'*SimplePersistence-Core-Developer' }
 SpFileDatabase class >> persist: aSymbol in: aClass [ 
 	"See Object>>#persistIn:as:"
@@ -192,13 +198,7 @@ SpFileDatabase class >> projectName [
 { #category : #restoring }
 SpFileDatabase class >> restoreBackupVersion: aNumber [
 	(self backupVersion: aNumber)
-		ifNotNil: [ :backup | self restoreFrom: backup ]
-]
-
-{ #category : #restoring }
-SpFileDatabase class >> restoreFrom: aDictionary [
-	"All client classes (i.e. that use me for persistence) must respond to this message. The argument (here aDictionary, but could be any type) is the data they gave me to persist"
-	aDictionary keysAndValuesDo: [ :klass :data | klass restoreFrom: data ]
+		ifNotNil: [ :backup | backup restore ]
 ]
 
 { #category : #restoring }
