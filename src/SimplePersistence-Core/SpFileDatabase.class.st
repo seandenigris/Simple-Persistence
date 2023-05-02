@@ -31,6 +31,38 @@ Class {
 }
 
 { #category : #private }
+SpFileDatabase class >> availableBackups [
+
+	^ self backupFiles collect: [ :e | 
+		(SpBackup newForDatabase:  self)
+			file: e;
+			yourself ].
+]
+
+{ #category : #GToolkit }
+SpFileDatabase class >> availableBackupsGtViewFor: aView [
+	<gtView>
+	
+	| list |
+	list := aView columnedList
+		title: 'Backups';
+		priority: -5;
+		items: [ self availableBackups sort: #version descending ];
+		column: 'Version' text: [ :each | each version ];
+		yourself.
+		
+	self metadata keysAndValuesDo: [ :k :v |
+		list
+			column: k text: [ :each | 
+				each header 
+					at: k 
+					ifPresent: [ :obj | obj gtDisplayText ]
+					ifAbsent: [ '' ] ] ].
+			
+	^ list
+]
+
+{ #category : #private }
 SpFileDatabase class >> availableVersions [
 
 	^ self backupFiles collect: [ :e | 
@@ -173,13 +205,13 @@ SpFileDatabase class >> menuCommandOn: aBuilder [
 
 { #category : #accessing }
 SpFileDatabase class >> metadata [
-	^ #()
+	^ Dictionary new
 ]
 
 { #category : #accessing }
 SpFileDatabase class >> newBackup [
 
-	^ SpBackup newForDatabase: self
+	^ SpNewBackup newForDatabase: self
 ]
 
 { #category : #'*SimplePersistence-Core-Developer' }
@@ -237,7 +269,7 @@ SpFileDatabase class >> saveRepository [
 	lock critical: [
 		self trimBackups.
 		version := self lastBackupVersion + 1.
-		self serializer serializeDB: self to: self backupDirectory / self name, version asString ].
+		self serializer serialize: self newBackup to: self backupDirectory / self name, version asString ].
 ]
 
 { #category : #saving }

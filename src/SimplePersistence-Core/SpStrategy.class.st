@@ -17,9 +17,3 @@ SpStrategy >> materializeFrom: aFileReference [
 
 	self subclassResponsibility.
 ]
-
-{ #category : #protocol }
-SpStrategy >> serializeDB: anSpFileDatabase to: aFileReference [
-
-	self serialize: anSpFileDatabase newBackup to: aFileReference
-]

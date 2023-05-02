@@ -3,7 +3,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'header',
-		'spData'
+		'spData',
+		'file',
+		'database'
 	],
 	#category : #'SimplePersistence-Core-Core'
 }
@@ -12,19 +14,49 @@ Class {
 SpBackup class >> newForDatabase: anSpFileDatabase [
 
 	^ self new
-		header: anSpFileDatabase metadata;
-		spData: anSpFileDatabase spData;
+		database: anSpFileDatabase;
 		yourself
 ]
 
 { #category : #accessing }
+SpBackup >> database [
+	^ database
+]
+
+{ #category : #accessing }
+SpBackup >> database: anObject [
+	database := anObject
+]
+
+{ #category : #accessing }
+SpBackup >> file [
+	^ file
+]
+
+{ #category : #accessing }
+SpBackup >> file: anObject [
+	file := anObject
+]
+
+{ #category : #accessing }
 SpBackup >> header [
-	^ header ifNil: [ Dictionary new ]
+	header ifNotNil: [ ^ header ].
+	
+	self file ifExists: [
+		^ header := self database serializer materializeHeaderFrom: self file ].
+	
+	^ header := Dictionary new
 ]
 
 { #category : #accessing }
 SpBackup >> header: anObject [
 	header := anObject
+]
+
+{ #category : #accessing }
+SpBackup >> printOn: aStream [
+
+	aStream nextPutAll: self version asString
 ]
 
 { #category : #accessing }
@@ -42,4 +74,9 @@ SpBackup >> spData [
 { #category : #accessing }
 SpBackup >> spData: anObject [
 	spData := anObject
+]
+
+{ #category : #accessing }
+SpBackup >> version [
+	^ self file extension asInteger.
 ]

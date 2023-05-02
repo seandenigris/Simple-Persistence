@@ -23,6 +23,12 @@ SpFuel4Strategy >> materializeFrom: aFileReference [
 ]
 
 { #category : #accessing }
+SpFuel4Strategy >> materializeHeaderFrom: aFileReference [
+
+	^ (self new: FLMaterializer withFile: aFileReference) materializeHeader additionalObjects
+]
+
+{ #category : #accessing }
 SpFuel4Strategy >> new: anFlClass withFile: aFileReference [
 	self subclassResponsibility
 ]

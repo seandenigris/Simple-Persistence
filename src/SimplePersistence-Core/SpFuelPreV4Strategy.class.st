@@ -29,6 +29,12 @@ SpFuelPreV4Strategy >> materializeFrom: aFileReference [
 ]
 
 { #category : #protocol }
+SpFuelPreV4Strategy >> materializeHeaderFrom: aFileReference [
+
+	^ Dictionary new
+]
+
+{ #category : #protocol }
 SpFuelPreV4Strategy >> serialize: anSpBackup to: aFileReference [
 
 	FLSerializer 
