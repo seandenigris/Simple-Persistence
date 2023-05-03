@@ -18,14 +18,14 @@ SpFuelPreV4Strategy class >> isActive [
 ]
 
 { #category : #protocol }
-SpFuelPreV4Strategy >> materializeFrom: aFileReference [
+SpFuelPreV4Strategy >> materialize: anSpBackup from: aFileReference [
 
 	| root |
 	root := FLMaterializer materializeFromFileNamed: aFileReference fullName.
 	
-	^ SpBackup new
+	anSpBackup
 		spData: root;
-		yourself
+		file: aFileReference
 ]
 
 { #category : #protocol }

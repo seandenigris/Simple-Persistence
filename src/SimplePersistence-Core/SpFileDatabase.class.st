@@ -65,8 +65,8 @@ SpFileDatabase class >> availableBackupsGtViewFor: aView [
 { #category : #private }
 SpFileDatabase class >> availableVersions [
 
-	^ self backupFiles collect: [ :e | 
-		self versionOf: e ].
+	^ self availableBackups collect: [ :e | 
+		e version ].
 ]
 
 { #category : #'*SimplePersistence-Core-Developer' }
@@ -96,12 +96,6 @@ SpFileDatabase class >> backupDirectoryParent [
 ]
 
 { #category : #private }
-SpFileDatabase class >> backupFileForVersion: aNumber [
-
-	^ self backupFiles detect: [:each | (self versionOf: each) = aNumber ] ifNone: [ nil ].
-]
-
-{ #category : #private }
 SpFileDatabase class >> backupFiles [
 
 	^ self backupDirectory files select: [ :e | 
@@ -110,10 +104,9 @@ SpFileDatabase class >> backupFiles [
 
 { #category : #private }
 SpFileDatabase class >> backupVersion: aNumber [
-	| backup |
-	backup := self backupFileForVersion: aNumber.
-	backup ifNil: [ ^ nil ].
-	^ self serializer materializeFrom: backup.
+	^ self availableBackups
+		detect: [ :e | e version = aNumber ]
+		ifNone: [ nil ]
 ]
 
 { #category : #accessing }
@@ -184,11 +177,11 @@ SpFileDatabase class >> lastBackup [
 { #category : #private }
 SpFileDatabase class >> lastBackupVersion [
 
-	| lastBackupFile |
-	lastBackupFile := self backupFiles detectMax: [:each | self versionOf: each].
-	^ lastBackupFile isNil
+	| lastBackup |
+	lastBackup := self availableBackups detectMax: [:each | each version].
+	^ lastBackup isNil
 		ifTrue: [ 0 ]
-		ifFalse: [ self versionOf: lastBackupFile ].
+		ifFalse: [ lastBackup version ].
 	
 ]
 
@@ -233,6 +226,12 @@ SpFileDatabase class >> restoreBackupVersion: aNumber [
 		ifNotNil: [ :backup | backup restore ]
 ]
 
+{ #category : #accessing }
+SpFileDatabase class >> restoreFrom: aDictionary [
+	"All client classes (i.e. that use me for persistence) must respond to this message. The argument (here aDictionary, but could be any type) is the data they gave me to persist"
+	aDictionary keysAndValuesDo: [ :klass :data | klass restoreFrom: data ]
+]
+
 { #category : #restoring }
 SpFileDatabase class >> restoreLastBackup [
 	<script>
@@ -274,12 +273,15 @@ SpFileDatabase class >> saveRepository [
 
 { #category : #saving }
 SpFileDatabase class >> saveRepositoryAndNotify [
-	| beforeStamp file didSucceed |
+	| beforeStamp newBackup didSucceed priorBackupVersion |
 	"Truncate because creation time below may have second precision"
 	beforeStamp := DateAndTime now truncated.
+	priorBackupVersion := self lastBackup version.
+	
 	self saveRepository.
-	file := self backupFileForVersion: self lastBackupVersion.
-	didSucceed := file size > 0 and: [ file creationTime >= beforeStamp ].
+
+	newBackup := self backupVersion: priorBackupVersion + 1.
+	didSucceed := newBackup file size > 0 and: [ newBackup file creationTime >= beforeStamp ].
 	didSucceed ifFalse: [ self error: self name , ' failed to save' ].
 	UIManager default inform: self name , ' saved on ' , beforeStamp printUS
 ]
@@ -374,15 +376,10 @@ SpFileDatabase class >> togglePersistenceDescription [
 SpFileDatabase class >> trimBackups [
 	| entries versionsToKeep |
 	versionsToKeep := self defaultHistoryCount.
-	entries := self backupFiles select: [ :e | e base = self name ].
+	entries := self availableBackups.
 	entries size < versionsToKeep ifTrue: [ ^ self ].
-	((entries sort: [ :a :b | a extension asInteger < b extension asInteger ]) allButLast: versionsToKeep) 
-		do: [ :entry | entry delete ].
-]
-
-{ #category : #private }
-SpFileDatabase class >> versionOf: backupFile [
-	^ backupFile extension asInteger.
+	entries sort: [ :e | e file extension asInteger ]  descending.
+	(entries allButFirst: versionsToKeep) do: [ :entry | entry delete ].
 ]
 
 { #category : #viewing }

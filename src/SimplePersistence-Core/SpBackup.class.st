@@ -28,6 +28,11 @@ SpBackup >> database: anObject [
 	database := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+SpBackup >> delete [
+	self file delete
+]
+
 { #category : #accessing }
 SpBackup >> file [
 	^ file
@@ -63,11 +68,17 @@ SpBackup >> printOn: aStream [
 SpBackup >> restore [
 
 	"All client classes (i.e. that use me for persistence) must respond to this message. The argument (here aDictionary, but could be any type) is the data they gave me to persist"
-	self spData keysAndValuesDo: [ :klass :data | klass restoreFrom: data ]
+	self database restoreFrom: self spData
 ]
 
 { #category : #accessing }
 SpBackup >> spData [
+	spData ifNotNil: [ ^ spData ].
+	
+	self database serializer 
+		materialize: self 
+		from: self file.
+		
 	^ spData
 ]
 
