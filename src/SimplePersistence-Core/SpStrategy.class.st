@@ -13,7 +13,7 @@ SpStrategy class >> default [
 ]
 
 { #category : #protocol }
-SpStrategy >> materialize: anSpBackup from: aFileReference [
+SpStrategy >> materialize: anSpBackup [
 
 	self subclassResponsibility.
 ]

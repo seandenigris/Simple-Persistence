@@ -33,10 +33,13 @@ Class {
 { #category : #private }
 SpFileDatabase class >> availableBackups [
 
-	^ self backupFiles collect: [ :e | 
+	| backups |
+	backups := self backupFiles collect: [ :e | 
 		(SpBackup newForDatabase:  self)
 			file: e;
 			yourself ].
+			
+	^ backups asSortedCollection: #version descending
 ]
 
 { #category : #GToolkit }
@@ -107,6 +110,11 @@ SpFileDatabase class >> backupVersion: aNumber [
 	^ self availableBackups
 		detect: [ :e | e version = aNumber ]
 		ifNone: [ nil ]
+]
+
+{ #category : #accessing }
+SpFileDatabase class >> dataVersion [
+	^ 1
 ]
 
 { #category : #accessing }
@@ -185,6 +193,22 @@ SpFileDatabase class >> lastBackupVersion [
 	
 ]
 
+{ #category : #accessing }
+SpFileDatabase class >> materialize: anSpBackup [
+
+	| migrations |
+	
+	migrations := self
+		migrationsFrom: anSpBackup dataVersion
+		to: self dataVersion.
+	
+	migrations do: [ :mig | mig preMaterialize value ].
+		
+	self serializer materialize: anSpBackup.
+	
+	migrations do: [ :mig | mig postMaterialize value ].
+]
+
 { #category : #'*SimplePersistence-Core-Developer' }
 SpFileDatabase class >> menuCommandOn: aBuilder [ 
 	<worldMenu> 
@@ -199,6 +223,26 @@ SpFileDatabase class >> menuCommandOn: aBuilder [
 { #category : #accessing }
 SpFileDatabase class >> metadata [
 	^ Dictionary new
+		at: #dataVersion put: self dataVersion;
+		yourself
+]
+
+{ #category : #accessing }
+SpFileDatabase class >> migrationsFrom: sourceVersion to: targetVersion [
+
+	| migrationPragmas migrations relevantMigrations |
+	sourceVersion < targetVersion ifFalse: [ ^ #() ].
+		
+	migrationPragmas := Pragma 
+		allNamed: #dataMigration 
+		from: self class
+		to: Object class.
+		
+	migrations := migrationPragmas collect: [ :pragma | self perform: pragma methodSelector ].
+	
+	relevantMigrations := migrations select: [ :mig | mig dataVersion > sourceVersion and: [ mig dataVersion <= targetVersion ] ].
+	
+	^ relevantMigrations sorted: #dataVersion ascending. 
 ]
 
 { #category : #accessing }

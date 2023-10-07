@@ -19,6 +19,26 @@ SpBackup class >> newForDatabase: anSpFileDatabase [
 ]
 
 { #category : #accessing }
+SpBackup >> dataGtViewFor: aView [
+	<gtView>
+	<gtClassView>
+	
+	^ aView forward 
+		title: 'Data';
+		priority: 105;
+		object: [ self spData ];
+		view: #gtItemsFor:
+]
+
+{ #category : #accessing }
+SpBackup >> dataVersion [
+
+	^ self header 
+		at: #dataVersion
+		ifAbsent: 1
+]
+
+{ #category : #accessing }
 SpBackup >> database [
 	^ database
 ]
@@ -61,7 +81,11 @@ SpBackup >> header: anObject [
 { #category : #accessing }
 SpBackup >> printOn: aStream [
 
-	aStream nextPutAll: self version asString
+	aStream 
+		nextPutAll: 'Backup version ';
+		nextPutAll: self version asString;
+		nextPutAll: ' of ';
+		nextPutAll: self database name
 ]
 
 { #category : #accessing }
@@ -75,9 +99,7 @@ SpBackup >> restore [
 SpBackup >> spData [
 	spData ifNotNil: [ ^ spData ].
 	
-	self database serializer 
-		materialize: self 
-		from: self file.
+	self database materialize: self.
 		
 	^ spData
 ]

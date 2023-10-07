@@ -11,15 +11,15 @@ SpFuel4Strategy class >> isActive [
 ]
 
 { #category : #accessing }
-SpFuel4Strategy >> materialize: anSpBackup from: aFileReference [
+SpFuel4Strategy >> materialize: anSpBackup [
 
 	| materialization |
-	materialization := (self new: FLMaterializer withFile: aFileReference) materialize.
+	materialization := (self new: FLMaterializer withFile: anSpBackup file) materialize.
 		
 	anSpBackup
 		header: materialization header additionalObjects;
 		spData: materialization root;
-		file: aFileReference
+		file: anSpBackup file
 ]
 
 { #category : #accessing }
