@@ -39,4 +39,7 @@ Metacello new
 	```
 
 # Users
-- [Resources-Live](https://github.com/seandenigris/Resources-Live) - see `ResourcesLiveDB` and clients
+- [Living Library](https://github.com/seandenigris/Living-Library) - see `LivingLibraryDB`
+- [My People](https://github.com/seandenigris/My-People) - see `MyPeopleDB`
+- [Resources-Live](https://github.com/seandenigris/Resources-Live) - see `ResourcesLiveDB`
+- [The Project Project](https://github.com/seandenigris/The-Project-Project) - see `TheProjectProjectDB`

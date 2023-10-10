@@ -13,3 +13,8 @@ SpNewBackup class >> newForDatabase: anSpFileDatabase [
 		spData: anSpFileDatabase spData;
 		yourself
 ]
+
+{ #category : #accessing }
+SpNewBackup >> spData [
+	^ spData
+]
