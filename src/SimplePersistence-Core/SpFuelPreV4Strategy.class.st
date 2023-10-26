@@ -18,7 +18,7 @@ SpFuelPreV4Strategy class >> isActive [
 ]
 
 { #category : #protocol }
-SpFuelPreV4Strategy >> materialize: anSpBackup [
+SpFuelPreV4Strategy >> materialize: anSpBackup withMigrations: aCollection [
 
 	| root |
 	root := FLMaterializer materializeFromFileNamed: anSpBackup file fullName.

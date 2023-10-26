@@ -13,7 +13,7 @@ SpStrategy class >> default [
 ]
 
 { #category : #protocol }
-SpStrategy >> materialize: anSpBackup [
+SpStrategy >> materialize: anSpBackup withMigrations: aCollection [
 
 	self subclassResponsibility.
 ]

@@ -11,11 +11,18 @@ SpFuel4Strategy class >> isActive [
 ]
 
 { #category : #accessing }
-SpFuel4Strategy >> materialize: anSpBackup [
+SpFuel4Strategy >> materialize: anSpBackup withMigrations: aCollection [
+	| materialization materializer |
+	materializer := self new: FLMaterializer withFile: anSpBackup file.
+	
+	aCollection do: [ :migration | 
+		migration classNameChanges keysAndValuesDo: [ :source :target |
+			materializer
+				migrateClassNamed: source
+				toClass: target asClass ] ].
+	
+	materialization := materializer materialize.
 
-	| materialization |
-	materialization := (self new: FLMaterializer withFile: anSpBackup file) materialize.
-		
 	anSpBackup
 		header: materialization header additionalObjects;
 		spData: materialization root;

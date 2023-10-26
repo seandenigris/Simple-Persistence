@@ -204,7 +204,9 @@ SpFileDatabase class >> materialize: anSpBackup [
 	
 	migrations do: [ :mig | mig preMaterialize value ].
 		
-	self serializer materialize: anSpBackup.
+	self serializer 
+		materialize: anSpBackup
+		withMigrations: migrations.
 	
 	migrations do: [ :mig | mig postMaterialize cull: anSpBackup spData ].
 ]

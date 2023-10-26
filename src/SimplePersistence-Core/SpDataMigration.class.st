@@ -4,10 +4,21 @@ Class {
 	#instVars : [
 		'dataVersion',
 		'preMaterialize',
-		'postMaterialize'
+		'postMaterialize',
+		'classNameChanges'
 	],
 	#category : #'SimplePersistence-Core'
 }
+
+{ #category : #accessing }
+SpDataMigration >> classNameChanges [
+	^ classNameChanges ifNil: [ #() ]
+]
+
+{ #category : #accessing }
+SpDataMigration >> classNameChanges: aCollection [
+	classNameChanges := aCollection asDictionary
+]
 
 { #category : #accessing }
 SpDataMigration >> dataVersion [
