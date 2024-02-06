@@ -6,7 +6,7 @@ Class {
 		'variableName',
 		'targetClass'
 	],
-	#category : 'SimplePersistence-Core-Developer'
+	#category : #'SimplePersistence-Developer'
 }
 
 { #category : #convenience }

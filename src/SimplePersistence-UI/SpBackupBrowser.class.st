@@ -1,7 +1,7 @@
 Class {
 	#name : #SpBackupBrowser,
 	#superclass : #SpPresenter,
-	#category : #'SimplePersistence-Core-Developer'
+	#category : #'SimplePersistence-UI'
 }
 
 { #category : #'as yet unclassified' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #SpGreedyInitRule,
 	#superclass : #RBBlockLintRule,
-	#category : 'SimplePersistence-Core-Developer'
+	#category : #'SimplePersistence-Developer'
 }
 
 { #category : #testing }

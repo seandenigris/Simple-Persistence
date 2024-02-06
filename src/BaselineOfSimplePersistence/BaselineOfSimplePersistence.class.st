@@ -40,7 +40,11 @@ BaselineOfSimplePersistence >> baseline: spec [
 			package: 'SimplePersistence-Core' with: [
 				spec requires: #('Magritte' "for browser"). ];
 			package: 'SimplePersistence-Tests' with: [
-				spec requires: #('SimplePersistence-Core' ). ].
+				spec requires: #('SimplePersistence-Core' ). ];
+			package: 'SimplePersistence-Developer' with: [
+				spec requires: #('SimplePersistence-Tests' ). ];
+			package: 'SimplePersistence-UI' with: [
+				spec requires: #('SimplePersistence-Developer' ). ].
 		spec 
 			group: 'Core' with: #('SimplePersistence-Core' ); 
 			group: 'Tests' with: #('SimplePersistence-Tests');
@@ -54,4 +58,5 @@ BaselineOfSimplePersistence >> baseline: spec [
 			package: 'SimplePersistence-Platform' with: 'SimplePersistence-Platform.pharo20'. ].
 	
 	  
+
 ]

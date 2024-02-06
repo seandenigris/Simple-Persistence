@@ -1,7 +1,7 @@
 Class {
 	#name : #SpPersistInstVarCommand,
 	#superclass : #SycSingleClassCommand,
-	#category : 'SimplePersistence-Core-Developer'
+	#category : #'SimplePersistence-Developer'
 }
 
 { #category : #activation }
