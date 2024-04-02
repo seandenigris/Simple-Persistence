@@ -42,9 +42,9 @@ BaselineOfSimplePersistence >> baseline: spec [
 			package: 'SimplePersistence-Tests' with: [
 				spec requires: #('SimplePersistence-Core' ). ];
 			package: 'SimplePersistence-Developer' with: [
-				spec requires: #('SimplePersistence-Tests' 'Magritte' ). ];
+				spec requires: #('SimplePersistence-Tests' 'SimplePersistence-UI'  ). ];
 			package: 'SimplePersistence-UI' with: [
-				spec requires: #('SimplePersistence-Developer' ). ].
+				spec requires: #('Magritte' ). ].
 		spec 
 			group: 'Core' with: #('SimplePersistence-Core' ); 
 			group: 'Tests' with: #('SimplePersistence-Tests');
