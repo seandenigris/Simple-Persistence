@@ -38,17 +38,18 @@ BaselineOfSimplePersistence >> baseline: spec [
 			baseline: 'Magritte' with: [
 				spec repository: 'github://seandenigris/Magritte' ];
 			package: 'SimplePersistence-Core' with: [
-				spec requires: #('Magritte' "for browser"). ];
+				spec requires: #("'Magritte'" "for browser"). ];
 			package: 'SimplePersistence-Tests' with: [
 				spec requires: #('SimplePersistence-Core' ). ];
 			package: 'SimplePersistence-Developer' with: [
-				spec requires: #('SimplePersistence-Tests' ). ];
+				spec requires: #('SimplePersistence-Tests'. 'Magritte' ). ];
 			package: 'SimplePersistence-UI' with: [
 				spec requires: #('SimplePersistence-Developer' ). ].
 		spec 
 			group: 'Core' with: #('SimplePersistence-Core' ); 
 			group: 'Tests' with: #('SimplePersistence-Tests');
 			group: 'CI' with: #('Core' 'Tests');
+			group: 'Dev' with: #('SimplePersistence-Developer');
 			group: 'default' with: #('Core' ) ].
 		
 	spec for: #'pharo2.x' do: [

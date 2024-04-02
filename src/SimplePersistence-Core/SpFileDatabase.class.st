@@ -72,15 +72,6 @@ SpFileDatabase class >> availableVersions [
 		e version ].
 ]
 
-{ #category : #'*SimplePersistence-Core-Developer' }
-SpFileDatabase class >> backupBrowser [
-	<script>
-	
-	| dbs |
-	dbs := self subclasses.
-	SpBackupBrowser openOn: dbs
-]
-
 { #category : #accessing }
 SpFileDatabase class >> backupDirectory [
 
@@ -209,17 +200,6 @@ SpFileDatabase class >> materialize: anSpBackup [
 		withMigrations: migrations.
 	
 	migrations do: [ :mig | mig postMaterialize cull: anSpBackup spData ].
-]
-
-{ #category : #'*SimplePersistence-Core-Developer' }
-SpFileDatabase class >> menuCommandOn: aBuilder [ 
-	<worldMenu> 
-	
-	(aBuilder item: #'Simple Persistence')
-		with: [
-			(aBuilder item: #'Backup Browser')
-				action: [ self backupBrowser ]; 
-				icon: Smalltalk ui icons glamourousTable. ]
 ]
 
 { #category : #accessing }
