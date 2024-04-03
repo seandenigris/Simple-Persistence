@@ -87,7 +87,7 @@ SpBackup >> printOn: aStream [
 		nextPutAll: ' of ';
 		nextPutAll: self database name;
 		nextPutAll: ' from ';
-		nextPutAll: self file modificationTime printUS
+		nextPutAll: self file modificationTime printString
 ]
 
 { #category : #accessing }
