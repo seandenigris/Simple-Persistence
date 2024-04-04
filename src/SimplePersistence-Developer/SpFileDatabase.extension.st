@@ -1,6 +1,6 @@
 Extension { #name : #SpFileDatabase }
 
-{ #category : #'*SimplePersistence-Core-Developer' }
+{ #category : #'*SimplePersistence-Developer' }
 SpFileDatabase class >> backupBrowser [
 	<script>
 	
@@ -9,7 +9,7 @@ SpFileDatabase class >> backupBrowser [
 	SpBackupBrowser openOn: dbs
 ]
 
-{ #category : #'*SimplePersistence-Core-Developer' }
+{ #category : #'*SimplePersistence-Developer' }
 SpFileDatabase class >> menuCommandOn: aBuilder [ 
 	<worldMenu> 
 	
@@ -20,7 +20,7 @@ SpFileDatabase class >> menuCommandOn: aBuilder [
 				icon: Smalltalk ui icons glamourousTable. ]
 ]
 
-{ #category : #'*SimplePersistence-Core-Developer' }
+{ #category : #'*SimplePersistence-Developer' }
 SpFileDatabase class >> persist: aSymbol in: aClass [ 
 	"See Object>>#persistIn:as:"
 

@@ -4,7 +4,7 @@ Class {
 	#category : #'SimplePersistence-Tests'
 }
 
-{ #category : #accessing }
+{ #category : #'tests-core' }
 SimplePersistenceTests >> testDataMigration [
 
 	| db objectToStore |
@@ -33,7 +33,25 @@ SimplePersistenceTests >> testDataMigration [
 				dataVersion: 1 ].
 ]
 
-{ #category : #accessing }
+{ #category : #'tests-extensions' }
+SimplePersistenceTests >> testFileLocatorStoreOn [
+	| original recipe clone |
+	original := FileLocator home / 'subfolder'.
+	recipe := String streamContents: [ :s | original storeOn: s ].
+	clone := Smalltalk compiler evaluate: recipe.
+	self assert: original equals: clone
+]
+
+{ #category : #'tests-extensions' }
+SimplePersistenceTests >> testFileReferenceStoreOn [
+	| original recipe clone |
+	original := 'root/sub1/sub2' asFileReference.
+	recipe := String streamContents: [ :s | original storeOn: s ].
+	clone := Smalltalk compiler evaluate: recipe.
+	self assert: original equals: clone
+]
+
+{ #category : #'tests-core' }
 SimplePersistenceTests >> testSaveObjects [
 
 	| db objectToStore anotherObjectToStore |
@@ -51,7 +69,7 @@ SimplePersistenceTests >> testSaveObjects [
 	self assert: db spData second equals: anotherObjectToStore.
 ]
 
-{ #category : #accessing }
+{ #category : #'tests-core' }
 SimplePersistenceTests >> testSaveObjectsInBackground [
 
 	| db objectToStore anotherObjectToStore |

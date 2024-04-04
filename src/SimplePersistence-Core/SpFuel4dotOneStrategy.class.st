@@ -13,7 +13,7 @@ SpFuel4dotOneStrategy class >> isActive [
 	
 	versionClass := Smalltalk globals at: #FLVersion ifAbsent: [ ^ false ].
 	currentFuel := versionClass current.
-	^ currentFuel major > 4 or: [ currentFuel major = 4 and: [ currentFuel minor >= 1 ] ]
+	^ currentFuel major = 4 and: [ currentFuel minor >= 1 ]
 ]
 
 { #category : #accessing }

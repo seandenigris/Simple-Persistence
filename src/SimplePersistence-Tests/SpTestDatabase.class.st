@@ -70,12 +70,13 @@ SpTestDatabase class >> spData: anObject [
 
 { #category : #migrations }
 SpTestDatabase class >> version2Migration [
+
 	^ SpDataMigration new
-		dataVersion: 2;
-		postMaterialize: [ SpDummyClassForTesting
-				allSubInstancesDo: [ :inst | 
-					| nameObject nameString |
-					nameString := inst instVarNamed: #name.
-					nameObject := SpDummyNameForTesting named: nameString.
-					inst instVarNamed: #name put: nameObject ] ]
+		  dataVersion: 2;
+		  postMaterialize: [
+			  SpDummyClassForTesting allSubInstancesDo: [ :inst |
+					  | nameObject nameString |
+					  nameString := inst instVarNamed: #name.
+					  nameObject := SpDummyNameForTesting named: nameString.
+					  inst instVarNamed: #name put: nameObject ] ]
 ]

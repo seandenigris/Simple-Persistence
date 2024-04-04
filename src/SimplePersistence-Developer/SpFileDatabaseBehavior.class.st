@@ -6,7 +6,7 @@ Class {
 		'instVarName',
 		'databaseClass'
 	],
-	#category : 'SimplePersistence-Core-Developer'
+	#category : #'SimplePersistence-Developer'
 }
 
 { #category : #'setting up' }

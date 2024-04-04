@@ -7,7 +7,7 @@ Class {
 		'postMaterialize',
 		'classNameChanges'
 	],
-	#category : #'SimplePersistence-Core'
+	#category : #'SimplePersistence-Core-Core'
 }
 
 { #category : #accessing }

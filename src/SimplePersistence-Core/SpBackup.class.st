@@ -79,6 +79,24 @@ SpBackup >> header: anObject [
 ]
 
 { #category : #accessing }
+SpBackup >> inspectionData: aBuilder [
+	<inspectorPresentationOrder: 50 title: 'Data'>
+	self spData ifNil: [ ^aBuilder newText text: 'nil'; yourself ].
+	
+	^ aBuilder newTable 
+		addColumn: (SpStringTableColumn 
+			title: 'Key'
+			evaluated: [ :each | StObjectPrinter asTruncatedTextFrom: each key ])
+			beSortable;
+		addColumn: (SpStringTableColumn 
+			title: 'Value' 
+			evaluated: [ :each | StObjectPrinter asTruncatedTextFrom: each value ])
+			beSortable;
+		items: (self spData associations collect: [:e | StInspectorAssociationNode hostObject: e ]);
+		yourself
+]
+
+{ #category : #accessing }
 SpBackup >> printOn: aStream [
 
 	aStream 
@@ -87,7 +105,7 @@ SpBackup >> printOn: aStream [
 		nextPutAll: ' of ';
 		nextPutAll: self database name;
 		nextPutAll: ' from ';
-		nextPutAll: self file modificationTime printUS
+		nextPutAll: self file modificationTime printString
 ]
 
 { #category : #accessing }

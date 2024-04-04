@@ -13,7 +13,7 @@ Class {
 		'listModel',
 		'classDefinition'
 	],
-	#category : #'SimplePersistence-Core-Developer'
+	#category : #'SimplePersistence-UI'
 }
 
 { #category : #'as yet unclassified' }
