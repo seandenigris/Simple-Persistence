@@ -130,17 +130,6 @@ SpFileDatabase class >> disablePersistence [
 	SessionManager default unregisterClassNamed: self name
 ]
 
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> disablePersistenceDescription [
-	"Disable while playing with #togglePersistence, which may replace me.
-	<magritteActionDescription>"
-	
-	^ MAActionDescription new
-			action: #disablePersistence;
-			enableBlock: [ :e | e isPersistenceEnabled ];
-			yourself
-]
-
 { #category : #private }
 SpFileDatabase class >> enablePersistence [
 	SessionManager default registerUserClassNamed: self name
@@ -233,14 +222,6 @@ SpFileDatabase class >> newBackup [
 	^ SpNewBackup newForDatabase: self
 ]
 
-{ #category : #'*SimplePersistence-Core-Developer' }
-SpFileDatabase class >> persist: aSymbol in: aClass [ 
-	"See Object>>#persistIn:as:"
-
-	SpFileDatabaseBehavior createFor: aClass persisting: aSymbol.
-	SpPersistentBehavior addTo: aClass for: aSymbol.
-]
-
 { #category : #accessing }
 SpFileDatabase class >> projectName [
 	^ self name allButLast: 2
@@ -262,18 +243,6 @@ SpFileDatabase class >> restoreFrom: aDictionary [
 SpFileDatabase class >> restoreLastBackup [
 	<script>
 	self restoreBackupVersion: self lastBackupVersion.
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> restoreLastBackupDescription [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #restoreLastBackup;
-			label: 'Restore Last Backup';
-			isMutator: false;
-			shortcut: $r asShortcut;
-			yourself
 ]
 
 { #category : #accessing }
@@ -310,18 +279,6 @@ SpFileDatabase class >> saveRepositoryAndNotify [
 	didSucceed := newBackup file size > 0 and: [ newBackup file creationTime >= beforeStamp ].
 	didSucceed ifFalse: [ self error: self name , ' failed to save' ].
 	UIManager default inform: self name , ' saved on ' , beforeStamp printString
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> saveRepositoryDescription [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #saveRepositoryAndNotify;
-			label: 'Save Repository';
-			isMutator: true;
-			shortcut: $s asShortcut;
-			yourself.
 ]
 
 { #category : #accessing }
@@ -386,18 +343,6 @@ SpFileDatabase class >> togglePersistence [
 		ifFalse: [ self enablePersistence ]
 ]
 
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> togglePersistenceDescription [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #togglePersistence;
-			label: 'Toggle Persistence';
-			isMutator: true;
-			shortcut: $t asShortcut;
-			yourself
-]
-
 { #category : #private }
 SpFileDatabase class >> trimBackups [
 	| entries versionsToKeep |
@@ -411,26 +356,4 @@ SpFileDatabase class >> trimBackups [
 { #category : #viewing }
 SpFileDatabase class >> viewBackupDirectory [
 	self backupDirectory peOpen
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> viewBackupDirectoryDescription [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: #viewBackupDirectory;
-			shortcut: $v asShortcut;
-			yourself.
-]
-
-{ #category : #'Magritte-actions' }
-SpFileDatabase class >> viewDataDescription [
-	<magritteActionDescription>
-	
-	^ MAActionDescription new
-			action: [ :db | db spData inspect ];
-			label: 'View Data';
-			isMutator: false;
-			shortcut: #v asShortcut;
-			yourself
 ]
