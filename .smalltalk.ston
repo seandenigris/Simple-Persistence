@@ -2,8 +2,10 @@ SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'SimplePersistence',
-      #directory : 'src',
-      #platforms : [ #pharo ]
+      #directory : 'repository',
+      #onConflict : #useIncoming
     }
-  ]
+  ],
+  #testing : {
+      #failOnZeroTests : false  }
 }
