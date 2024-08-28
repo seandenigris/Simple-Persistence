@@ -322,7 +322,7 @@ SpFileDatabase class >> saveRepositoryAndNotify [
 	| beforeStamp newBackup didSucceed priorBackupVersion |
 	"Truncate because creation time below may have second precision"
 	beforeStamp := DateAndTime now truncated.
-	priorBackupVersion := self lastBackup version.
+	priorBackupVersion := self lastBackup ifNotNil: #version ifNil: [ 0 ].
 	
 	self saveRepository.
 
