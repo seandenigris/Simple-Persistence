@@ -1,15 +1,17 @@
 Class {
-	#name : #SpPersistentBehavior,
-	#superclass : #Object,
+	#name : 'SpPersistentBehavior',
+	#superclass : 'Object',
 	#instVars : [
 		'subjectClass',
 		'variableName',
 		'targetClass'
 	],
-	#category : 'SimplePersistence-Core-Developer'
+	#category : 'SimplePersistence-Core-Developer',
+	#package : 'SimplePersistence-Core',
+	#tag : 'Developer'
 }
 
-{ #category : #convenience }
+{ #category : 'convenience' }
 SpPersistentBehavior class >> addTo: aClass for: aSymbol [
 	^ self new
 		targetClass: aClass;
@@ -17,7 +19,7 @@ SpPersistentBehavior class >> addTo: aClass for: aSymbol [
 		add
 ]
 
-{ #category : #API }
+{ #category : 'API' }
 SpPersistentBehavior >> add [
 	| methodsExist |
 	methodsExist := #(spData restoreFrom:)
@@ -27,21 +29,21 @@ SpPersistentBehavior >> add [
 	self addSetter
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpPersistentBehavior >> addGetter [
 	self addMethodFromTemplate: 'spData
 
 	^ {1}.'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpPersistentBehavior >> addMethodFromTemplate: template [
 	| source |
 	source := template format: { self variableName }.
 	self targetClass class compile: source classified: 'persistence'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpPersistentBehavior >> addSetter [
 
 	self addMethodFromTemplate: 'restoreFrom: anObject
@@ -49,22 +51,22 @@ SpPersistentBehavior >> addSetter [
 	{1} := anObject.'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpPersistentBehavior >> targetClass [
 	^ targetClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpPersistentBehavior >> targetClass: aClass [
 	targetClass := aClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpPersistentBehavior >> variableName [
 	^ variableName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpPersistentBehavior >> variableName: aSymbol [
 	variableName := aSymbol
 ]

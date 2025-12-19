@@ -1,10 +1,12 @@
 Class {
-	#name : #SpFuel4dotZeroStrategy,
-	#superclass : #SpFuel4Strategy,
-	#category : #'SimplePersistence-Core-Core'
+	#name : 'SpFuel4dotZeroStrategy',
+	#superclass : 'SpFuel4Strategy',
+	#category : 'SimplePersistence-Core-Core',
+	#package : 'SimplePersistence-Core',
+	#tag : 'Core'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SpFuel4dotZeroStrategy class >> isActive [
 	| currentFuel versionClass |
 	versionClass := Smalltalk globals at: #FLVersion ifAbsent: [ ^ false ].
@@ -12,7 +14,7 @@ SpFuel4dotZeroStrategy class >> isActive [
 	^ currentFuel major = 4 and: [ currentFuel minor = 0 ]
 ]
 
-{ #category : #protocol }
+{ #category : 'protocol' }
 SpFuel4dotZeroStrategy >> new: anFlClass withFile: aFileReference [
 	^ anFlClass new
 		fileName: aFileReference fullName;

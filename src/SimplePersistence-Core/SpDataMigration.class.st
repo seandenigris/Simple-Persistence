@@ -1,51 +1,52 @@
 Class {
-	#name : #SpDataMigration,
-	#superclass : #Object,
+	#name : 'SpDataMigration',
+	#superclass : 'Object',
 	#instVars : [
 		'dataVersion',
 		'preMaterialize',
 		'postMaterialize',
 		'classNameChanges'
 	],
-	#category : #'SimplePersistence-Core'
+	#category : 'SimplePersistence-Core',
+	#package : 'SimplePersistence-Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpDataMigration >> classNameChanges [
 	^ classNameChanges ifNil: [ #() ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpDataMigration >> classNameChanges: aCollection [
 	classNameChanges := aCollection asDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpDataMigration >> dataVersion [
 	^ dataVersion
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpDataMigration >> dataVersion: anObject [
 	dataVersion := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpDataMigration >> postMaterialize [
 	^ postMaterialize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpDataMigration >> postMaterialize: anObject [
 	postMaterialize := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpDataMigration >> preMaterialize [
 	^ preMaterialize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpDataMigration >> preMaterialize: anObject [
 	preMaterialize := anObject
 ]

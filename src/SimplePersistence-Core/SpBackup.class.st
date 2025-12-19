@@ -1,16 +1,18 @@
 Class {
-	#name : #SpBackup,
-	#superclass : #Object,
+	#name : 'SpBackup',
+	#superclass : 'Object',
 	#instVars : [
 		'header',
 		'spData',
 		'file',
 		'database'
 	],
-	#category : #'SimplePersistence-Core-Core'
+	#category : 'SimplePersistence-Core-Core',
+	#package : 'SimplePersistence-Core',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup class >> newForDatabase: anSpFileDatabase [
 
 	^ self new
@@ -18,7 +20,7 @@ SpBackup class >> newForDatabase: anSpFileDatabase [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> dataGtViewFor: aView [
 	<gtView>
 	<gtClassView>
@@ -30,7 +32,7 @@ SpBackup >> dataGtViewFor: aView [
 		view: #gtItemsFor:
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> dataVersion [
 
 	^ self header 
@@ -38,32 +40,32 @@ SpBackup >> dataVersion [
 		ifAbsent: 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> database [
 	^ database
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> database: anObject [
 	database := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SpBackup >> delete [
 	self file delete
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> file [
 	^ file
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> file: anObject [
 	file := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> header [
 	header ifNotNil: [ ^ header ].
 	
@@ -73,12 +75,12 @@ SpBackup >> header [
 	^ header := Dictionary new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> header: anObject [
 	header := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> printOn: aStream [
 
 	aStream 
@@ -90,14 +92,14 @@ SpBackup >> printOn: aStream [
 		nextPutAll: self file modificationTime printUS
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> restore [
 
 	"All client classes (i.e. that use me for persistence) must respond to this message. The argument (here aDictionary, but could be any type) is the data they gave me to persist"
 	self database restoreFrom: self spData
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> spData [
 	spData ifNotNil: [ ^ spData ].
 	
@@ -106,12 +108,12 @@ SpBackup >> spData [
 	^ spData
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> spData: anObject [
 	spData := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpBackup >> version [
 	^ self file extension asInteger.
 ]

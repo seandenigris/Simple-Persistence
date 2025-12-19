@@ -1,6 +1,6 @@
 Class {
-	#name : #SpPersistenceAnalyzer,
-	#superclass : #SpPresenter,
+	#name : 'SpPersistenceAnalyzer',
+	#superclass : 'SpPresenter',
 	#instVars : [
 		'okButton',
 		'colorLabel',
@@ -13,16 +13,18 @@ Class {
 		'listModel',
 		'classDefinition'
 	],
-	#category : #'SimplePersistence-Core-Developer'
+	#category : 'SimplePersistence-Core-Developer',
+	#package : 'SimplePersistence-Core',
+	#tag : 'Developer'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SpPersistenceAnalyzer class >> open [
 
 	self new openWithSpec.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SpPersistenceAnalyzer class >> spec [
 	<spec: #default>
 
@@ -33,25 +35,25 @@ SpPersistenceAnalyzer class >> spec [
 			yourself.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SpPersistenceAnalyzer class >> title [
 
 	^ 'Classes which may need to be persisted'.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpPersistenceAnalyzer >> classDefinition [
 
 	^ classDefinition.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpPersistenceAnalyzer >> classesPossiblyNeedingPersistence [
 
 	^ self classesPossiblyNeedingPersistenceIn: self packages.
 ]
 
-{ #category : #'private-model' }
+{ #category : 'private-model' }
 SpPersistenceAnalyzer >> classesPossiblyNeedingPersistenceIn: packageCollection [
 
 	^ packageCollection inject: OrderedCollection new into: [ :col :p | | possPersistentClasses |
@@ -61,7 +63,7 @@ SpPersistenceAnalyzer >> classesPossiblyNeedingPersistenceIn: packageCollection 
 			col ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SpPersistenceAnalyzer >> initializePresenter [
 	
 	listModel whenSelectedItemChanged: [ :selection |
@@ -69,7 +71,7 @@ SpPersistenceAnalyzer >> initializePresenter [
 			ifNotNil: [ :class | classDefinition text: class class definition ] ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SpPersistenceAnalyzer >> initializeWidgets [
 
     | colorItems |
@@ -107,32 +109,32 @@ SpPersistenceAnalyzer >> initializeWidgets [
 		action: [ self ok ]."
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpPersistenceAnalyzer >> listModel [
 
 	^ listModel.
 ]
 
-{ #category : #'private-model' }
+{ #category : 'private-model' }
 SpPersistenceAnalyzer >> noDbPersists: aClass [ 
 
 	^ self persistenceClasses noneSatisfy: [ :db | db persists: aClass ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpPersistenceAnalyzer >> okButton [
 
 	^ okButton.
 ]
 
-{ #category : #'private-model' }
+{ #category : 'private-model' }
 SpPersistenceAnalyzer >> packages [
 
 	self flag: 'hard code to bootstrap'.
 	^ RPackage organizer packages select: [ :e | e name beginsWith: 'TradeMaster' ].
 ]
 
-{ #category : #'private-model' }
+{ #category : 'private-model' }
 SpPersistenceAnalyzer >> persistenceClasses [
 
 	^ self packages inject: OrderedCollection new into: [ :col :p | | dbs |

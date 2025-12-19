@@ -1,10 +1,12 @@
 Class {
-	#name : #SpNewBackup,
-	#superclass : #SpBackup,
-	#category : #'SimplePersistence-Core-Core'
+	#name : 'SpNewBackup',
+	#superclass : 'SpBackup',
+	#category : 'SimplePersistence-Core-Core',
+	#package : 'SimplePersistence-Core',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpNewBackup class >> newForDatabase: anSpFileDatabase [
 
 	^ self new
@@ -14,7 +16,7 @@ SpNewBackup class >> newForDatabase: anSpFileDatabase [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpNewBackup >> spData [
 	^ spData
 ]

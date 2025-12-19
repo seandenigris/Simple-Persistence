@@ -1,16 +1,18 @@
 Class {
-	#name : #SpFuel4Strategy,
-	#superclass : #SpStrategy,
-	#category : #'SimplePersistence-Core-Core'
+	#name : 'SpFuel4Strategy',
+	#superclass : 'SpStrategy',
+	#category : 'SimplePersistence-Core-Core',
+	#package : 'SimplePersistence-Core',
+	#tag : 'Core'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SpFuel4Strategy class >> isActive [
 	"I am abstract"
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFuel4Strategy >> materialize: anSpBackup withMigrations: aCollection [
 	| materialization materializer |
 	materializer := self new: FLMaterializer withFile: anSpBackup file.
@@ -29,18 +31,18 @@ SpFuel4Strategy >> materialize: anSpBackup withMigrations: aCollection [
 		file: anSpBackup file
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFuel4Strategy >> materializeHeaderFrom: aFileReference [
 
 	^ (self new: FLMaterializer withFile: aFileReference) materializeHeader additionalObjects
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFuel4Strategy >> new: anFlClass withFile: aFileReference [
 	self subclassResponsibility
 ]
 
-{ #category : #protocol }
+{ #category : 'protocol' }
 SpFuel4Strategy >> serialize: anSpBackup to: aFileReference [
 
 	| serializer |

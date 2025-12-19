@@ -6,18 +6,20 @@ See http://rmod.lille.inria.fr/web/pier/software/Fuel for more details.
 * Developed under the MIT license.
 "
 Class {
-	#name : #SpFuelPreV4Strategy,
-	#superclass : #SpStrategy,
-	#category : #'SimplePersistence-Core-Core'
+	#name : 'SpFuelPreV4Strategy',
+	#superclass : 'SpStrategy',
+	#category : 'SimplePersistence-Core-Core',
+	#package : 'SimplePersistence-Core',
+	#tag : 'Core'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SpFuelPreV4Strategy class >> isActive [
 	
 	^ FLSerializer respondsTo: #currentVersion
 ]
 
-{ #category : #protocol }
+{ #category : 'protocol' }
 SpFuelPreV4Strategy >> materialize: anSpBackup withMigrations: aCollection [
 
 	| root |
@@ -28,13 +30,13 @@ SpFuelPreV4Strategy >> materialize: anSpBackup withMigrations: aCollection [
 		file: anSpBackup file
 ]
 
-{ #category : #protocol }
+{ #category : 'protocol' }
 SpFuelPreV4Strategy >> materializeHeaderFrom: aFileReference [
 
 	^ Dictionary new
 ]
 
-{ #category : #protocol }
+{ #category : 'protocol' }
 SpFuelPreV4Strategy >> serialize: anSpBackup to: aFileReference [
 
 	FLSerializer 

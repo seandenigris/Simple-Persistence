@@ -18,8 +18,8 @@ To customize:
 
 "
 Class {
-	#name : #SpFileDatabase,
-	#superclass : #Object,
+	#name : 'SpFileDatabase',
+	#superclass : 'Object',
 	#classVars : [
 		'RootDataFolder',
 		'SerializerClass'
@@ -27,10 +27,12 @@ Class {
 	#classInstVars : [
 		'lock'
 	],
-	#category : #'SimplePersistence-Core-Core'
+	#category : 'SimplePersistence-Core-Core',
+	#package : 'SimplePersistence-Core',
+	#tag : 'Core'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabase class >> availableBackups [
 
 	| backups |
@@ -42,7 +44,7 @@ SpFileDatabase class >> availableBackups [
 	^ backups asSortedCollection: #version descending
 ]
 
-{ #category : #GToolkit }
+{ #category : 'GToolkit' }
 SpFileDatabase class >> availableBackupsGtViewFor: aView [
 	<gtView>
 	
@@ -65,14 +67,14 @@ SpFileDatabase class >> availableBackupsGtViewFor: aView [
 	^ list
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabase class >> availableVersions [
 
 	^ self availableBackups collect: [ :e | 
 		e version ].
 ]
 
-{ #category : #'*SimplePersistence-Core-Developer' }
+{ #category : 'development support' }
 SpFileDatabase class >> backupBrowser [
 	<script>
 	
@@ -81,43 +83,43 @@ SpFileDatabase class >> backupBrowser [
 	SpBackupBrowser openOn: dbs
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> backupDirectory [
 
 	^ (self backupDirectoryParent / self backupDirectoryName) ensureCreateDirectory.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> backupDirectoryName [
 
 	^self name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> backupDirectoryParent [
 	^ self rootDataFolder
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabase class >> backupFiles [
 
 	^ self backupDirectory files select: [ :e | 
 			(e basename beginsWith: self name) and: [ e extension isAllDigits ] ].
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabase class >> backupVersion: aNumber [
 	^ self availableBackups
 		detect: [ :e | e version = aNumber ]
 		ifNone: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> dataVersion [
 	^ 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> deepRoots [
 	"My root data objects, and those of other DBs I contain, recursively all the way through the tree"
 	
@@ -128,18 +130,18 @@ SpFileDatabase class >> deepRoots [
 				ifFalse: [ result << cls spData ] ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> defaultHistoryCount [
 	"How many backups to keep."
 	^ 50
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabase class >> disablePersistence [
 	SessionManager default unregisterClassNamed: self name
 ]
 
-{ #category : #'Magritte-actions' }
+{ #category : 'Magritte-actions' }
 SpFileDatabase class >> disablePersistenceDescription [
 	"Disable while playing with #togglePersistence, which may replace me.
 	<magritteActionDescription>"
@@ -150,12 +152,12 @@ SpFileDatabase class >> disablePersistenceDescription [
 			yourself
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabase class >> enablePersistence [
 	SessionManager default registerUserClassNamed: self name
 ]
 
-{ #category : #GToolkit }
+{ #category : 'GToolkit' }
 SpFileDatabase class >> gtBasicFor: aView [
 	<gtView>
 	<gtClassView>
@@ -167,22 +169,22 @@ SpFileDatabase class >> gtBasicFor: aView [
 		view: #gtItemsFor:
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> isAbstract [
 	^ self name = #SpFileDatabase
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SpFileDatabase class >> isPersistenceEnabled [
 	^ SessionManager default hasRegistered: self name
 ]
 
-{ #category : #restoring }
+{ #category : 'restoring' }
 SpFileDatabase class >> lastBackup [
 	^ self backupVersion: self lastBackupVersion.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabase class >> lastBackupVersion [
 
 	| lastBackup |
@@ -193,7 +195,7 @@ SpFileDatabase class >> lastBackupVersion [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> materialize: anSpBackup [
 
 	| migrations |
@@ -211,7 +213,7 @@ SpFileDatabase class >> materialize: anSpBackup [
 	migrations do: [ :mig | mig postMaterialize cull: anSpBackup spData ].
 ]
 
-{ #category : #'*SimplePersistence-Core-Developer' }
+{ #category : 'development support' }
 SpFileDatabase class >> menuCommandOn: aBuilder [ 
 	<worldMenu> 
 	
@@ -222,14 +224,14 @@ SpFileDatabase class >> menuCommandOn: aBuilder [
 				icon: Smalltalk ui icons glamourousTable. ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> metadata [
 	^ Dictionary new
 		at: #dataVersion put: self dataVersion;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> migrationsFrom: sourceVersion to: targetVersion [
 
 	| migrationPragmas migrations relevantMigrations |
@@ -247,13 +249,13 @@ SpFileDatabase class >> migrationsFrom: sourceVersion to: targetVersion [
 	^ relevantMigrations sorted: #dataVersion ascending. 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> newBackup [
 
 	^ SpNewBackup newForDatabase: self
 ]
 
-{ #category : #'*SimplePersistence-Core-Developer' }
+{ #category : 'development support' }
 SpFileDatabase class >> persist: aSymbol in: aClass [ 
 	"See Object>>#persistIn:as:"
 
@@ -261,30 +263,30 @@ SpFileDatabase class >> persist: aSymbol in: aClass [
 	SpPersistentBehavior addTo: aClass for: aSymbol.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> projectName [
 	^ self name allButLast: 2
 ]
 
-{ #category : #restoring }
+{ #category : 'restoring' }
 SpFileDatabase class >> restoreBackupVersion: aNumber [
 	(self backupVersion: aNumber)
 		ifNotNil: [ :backup | backup restore ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> restoreFrom: aDictionary [
 	"All client classes (i.e. that use me for persistence) must respond to this message. The argument (here aDictionary, but could be any type) is the data they gave me to persist"
 	aDictionary keysAndValuesDo: [ :klass :data | klass restoreFrom: data ]
 ]
 
-{ #category : #restoring }
+{ #category : 'restoring' }
 SpFileDatabase class >> restoreLastBackup [
 	<script>
 	self restoreBackupVersion: self lastBackupVersion.
 ]
 
-{ #category : #'Magritte-actions' }
+{ #category : 'Magritte-actions' }
 SpFileDatabase class >> restoreLastBackupDescription [
 	<magritteActionDescription>
 	
@@ -296,17 +298,17 @@ SpFileDatabase class >> restoreLastBackupDescription [
 			yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> rootDataFolder [
 	^ RootDataFolder ifNil: [ FileLocator imageDirectory ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> rootDataFolder: anObject [
 	RootDataFolder := anObject
 ]
 
-{ #category : #saving }
+{ #category : 'saving' }
 SpFileDatabase class >> saveRepository [
 	<script>
 	| version |
@@ -317,7 +319,7 @@ SpFileDatabase class >> saveRepository [
 		self serializer serialize: self newBackup to: self backupDirectory / self name, version asString ].
 ]
 
-{ #category : #saving }
+{ #category : 'saving' }
 SpFileDatabase class >> saveRepositoryAndNotify [
 	| beforeStamp newBackup didSucceed priorBackupVersion |
 	"Truncate because creation time below may have second precision"
@@ -332,7 +334,7 @@ SpFileDatabase class >> saveRepositoryAndNotify [
 	UIManager default inform: self name , ' saved on ' , beforeStamp printUS
 ]
 
-{ #category : #'Magritte-actions' }
+{ #category : 'Magritte-actions' }
 SpFileDatabase class >> saveRepositoryDescription [
 	<magritteActionDescription>
 	
@@ -344,7 +346,7 @@ SpFileDatabase class >> saveRepositoryDescription [
 			yourself.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> schema [
 	"Return aCollection of classes for which we will be handling persistence
 		Example: `^ { QuQuote. LivingLibraryDB }`; where 
@@ -354,7 +356,7 @@ SpFileDatabase class >> schema [
 	self subclassResponsibility
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabase class >> serializer [
 	"See SpSerializer class comment"
 
@@ -363,23 +365,23 @@ SpFileDatabase class >> serializer [
 		ifNotNil: [ :cls | cls new ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> serializerClass: anSpFuelSerializerClass [
 	SerializerClass := anSpFuelSerializerClass
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabase class >> setUp [
 	self restoreLastBackup.
 	self enablePersistence
 ]
 
-{ #category : #'system startup' }
+{ #category : 'system startup' }
 SpFileDatabase class >> shutDown: isGoingDown [ 
 	isGoingDown ifTrue: [ self saveRepository ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SpFileDatabase class >> spData [
 	"All client classes (i.e. that use me for persistence) must respond to this message with the data to be persisted. Multiple DBs in the tree may include the same object without increasing the size on disk. Fuel is smart enough i.e. only saves each object once even if there are multiple references to it in the graph."
 	^ self schema
@@ -387,26 +389,26 @@ SpFileDatabase class >> spData [
 		into: [ :dict :klass | dict at: klass put: klass spData; yourself ]
 ]
 
-{ #category : #'system startup' }
+{ #category : 'system startup' }
 SpFileDatabase class >> startUp: isComingUp [ 
 	isComingUp ifTrue: [ self restoreLastBackup ]
 ]
 
-{ #category : #saving }
+{ #category : 'saving' }
 SpFileDatabase class >> takeSnapshot [
 	"Motivation (vs. #saveRepository) - if you want a little extra snappiness and you're not worried about making the user wait for the flush to disk"
 	[self saveRepository] forkAt: Processor userBackgroundPriority
 		named: 'snapshot: ' , self class name
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabase class >> togglePersistence [
 	self isPersistenceEnabled
 		ifTrue: [ self disablePersistence ]
 		ifFalse: [ self enablePersistence ]
 ]
 
-{ #category : #'Magritte-actions' }
+{ #category : 'Magritte-actions' }
 SpFileDatabase class >> togglePersistenceDescription [
 	<magritteActionDescription>
 	
@@ -418,7 +420,7 @@ SpFileDatabase class >> togglePersistenceDescription [
 			yourself
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SpFileDatabase class >> trimBackups [
 	| entries versionsToKeep |
 	versionsToKeep := self defaultHistoryCount.
@@ -428,12 +430,12 @@ SpFileDatabase class >> trimBackups [
 	(entries allButFirst: versionsToKeep) do: [ :entry | entry delete ].
 ]
 
-{ #category : #viewing }
+{ #category : 'viewing' }
 SpFileDatabase class >> viewBackupDirectory [
 	self backupDirectory peOpen
 ]
 
-{ #category : #'Magritte-actions' }
+{ #category : 'Magritte-actions' }
 SpFileDatabase class >> viewBackupDirectoryDescription [
 	<magritteActionDescription>
 	
@@ -443,7 +445,7 @@ SpFileDatabase class >> viewBackupDirectoryDescription [
 			yourself.
 ]
 
-{ #category : #'Magritte-actions' }
+{ #category : 'Magritte-actions' }
 SpFileDatabase class >> viewDataDescription [
 	<magritteActionDescription>
 	
