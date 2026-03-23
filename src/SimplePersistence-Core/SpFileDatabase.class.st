@@ -166,7 +166,8 @@ SpFileDatabase class >> gtBasicFor: aView [
 		title: 'Data';
 		priority: -9;
 		object: [ self spData ];
-		view: #gtItemsFor:
+		view: #gtItemsFor:;
+		actionUpdateButton
 ]
 
 { #category : 'accessing' }
