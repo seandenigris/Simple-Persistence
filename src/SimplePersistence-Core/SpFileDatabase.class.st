@@ -157,19 +157,6 @@ SpFileDatabase class >> enablePersistence [
 	SessionManager default registerUserClassNamed: self name
 ]
 
-{ #category : 'GToolkit' }
-SpFileDatabase class >> gtBasicFor: aView [
-	<gtView>
-	<gtClassView>
-	self isAbstract ifTrue: [ ^ aView empty ].
-	^ aView forward 
-		title: 'Data';
-		priority: -9;
-		object: [ self spData ];
-		view: #gtItemsFor:;
-		actionUpdateButton
-]
-
 { #category : 'accessing' }
 SpFileDatabase class >> isAbstract [
 	^ self name = #SpFileDatabase
@@ -388,6 +375,22 @@ SpFileDatabase class >> spData [
 	^ self schema
 		inject: Dictionary new
 		into: [ :dict :klass | dict at: klass put: klass spData; yourself ]
+]
+
+{ #category : 'GT Views' }
+SpFileDatabase class >> spDataGtViewFor: aView [
+	<gtView>
+	<gtClassView>
+	
+	self isAbstract ifTrue: [ ^ aView empty ].
+	
+	^ aView forward 
+		title: 'Data';
+		priority: -9;
+		object: [ self spData ];
+		view: #gtItemsFor:;
+		send: [ :assoc | assoc ];
+		actionUpdateButton
 ]
 
 { #category : 'system startup' }
